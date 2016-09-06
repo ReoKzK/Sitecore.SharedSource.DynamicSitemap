@@ -1,0 +1,8 @@
+.vs/
+Sitecore.SharedSource.DynamicSitemap/obj/
+Sitecore.SharedSource.DynamicSitemap/bin/
+*.user
+packages/
+Sitecore.SharedSource.DynamicSitemap.Tests/obj/
+Sitecore.SharedSource.DynamicSitemap.Tests/bin/
+Libraries/
