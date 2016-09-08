@@ -1,7 +1,19 @@
 # Sitecore.SharedSource.DynamicSitemap
-Sitecore sitemap module
+Sitecore sitemap module that tries to be as much flexible and configurable as possible.
 
-Extendable sitemap xml generator. 
+It has two main assumptions:
+
+- Flexible configuration
+
+	Gives end user as many as possible configuration options. It is easier to edit Sitecore items than edit and deploy config files.
+
+- Extensibility
+	
+	Code functionality should be extensible and overridable. It should be easy to extend or override functionality, without decompiling and copy-pasting a lot of code.
+
+-
+
+Module was based on the original Sitemap XML module
 	
 ###New features:
 - Configurations for sites controlled from Content Editor
