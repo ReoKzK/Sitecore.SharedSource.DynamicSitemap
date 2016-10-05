@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap", "Sitecore.SharedSource.DynamicSitemap\Sitecore.SharedSource.DynamicSitemap.csproj", "{57A4EFDD-889F-47CF-A47B-B65F813CB234}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap.Tests", "Sitecore.SharedSource.DynamicSitemap.Tests\Sitecore.SharedSource.DynamicSitemap.Tests.csproj", "{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap.ItemsProcessor", "Sitecore.SharedSource.DynamicSitemap.ItemsProcessor\Sitecore.SharedSource.DynamicSitemap.ItemsProcessor.csproj", "{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

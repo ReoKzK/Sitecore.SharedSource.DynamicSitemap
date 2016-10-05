@@ -6,8 +6,10 @@ using Sitecore.SharedSource.DynamicSitemap.Configuration;
 using Sitecore.SharedSource.DynamicSitemap.Constants;
 using Sitecore.SharedSource.DynamicSitemap.Extensions;
 using Sitecore.SharedSource.DynamicSitemap.Helpers;
+using Sitecore.SharedSource.DynamicSitemap.Interfaces;
 using Sitecore.SharedSource.DynamicSitemap.Logic;
 using Sitecore.SharedSource.DynamicSitemap.Model;
+using Sitecore.SharedSource.DynamicSitemap.Modules;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -105,6 +107,8 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// </summary>
         public void ReadConfigurations()
         {
+            ReadGlobalSitecoreConfiguration();
+
             Item[] configurationItems = Database.SelectItems(DynamicSitemapConfiguration.SitemapConfigurationItemPath + DynamicSitemapConfiguration.SitemapConfigurationSitesFolderName + "/*[@@templateid='" + TemplateIds.SiteConfigurationTemplateId + "']");
 
             if (configurationItems.Count() == 0)
@@ -113,9 +117,13 @@ namespace Sitecore.SharedSource.DynamicSitemap
                 return;
             }
 
+            SiteConfigurations = new List<SitemapSiteConfiguration>();
+
             foreach (var configurationItem in configurationItems)
             {
-                foreach (var languageItem in configurationItem.Languages)
+                var languageItems = configurationItem.Languages.Where(x => SitecoreConfiguration.ProcessedLanguages.Contains(x.Name)).ToList();
+
+                foreach (var languageItem in languageItems)
                 {
                     var item = configurationItem.Database.GetItem(configurationItem.ID, languageItem);
 
@@ -131,12 +139,28 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
                         sitemapSiteConfiguration.SitemapFilePath = DynamicSitemapConfiguration.SitemapConfigurationOutputFolder + "/" + sitemapSiteConfiguration.SitemapFileName;
 
+                        if (!String.IsNullOrWhiteSpace(sitemapSiteConfiguration.ItemsProcessorTypeToLoad))
+                        {
+                            var loader = new ItemsProcessorLoader();
+                            var itemsProcessor = loader.Load(sitemapSiteConfiguration.ItemsProcessorTypeToLoad);
+
+                            if (itemsProcessor != null)
+                            {
+                                sitemapSiteConfiguration.ItemsProcessor = itemsProcessor;
+                            }
+
+                            else
+                            {
+                                //log
+                            }
+                        }
+                        
                         SiteConfigurations.Add(sitemapSiteConfiguration);
                     }
                 }
             }
-            
-            ReadGlobalSitecoreConfiguration();
+
+            SitecoreConfiguration.MainSiteConfiguration = SiteConfigurations.FirstOrDefault(x => x.Site.Name.ToLower() == SitecoreConfiguration.MainSiteConfigurationItem.Name.ToLower());
 
             SitemapIndex = new SitemapIndexConfiguration();
             SitemapIndex.ServerHost = SitecoreConfiguration.MainSiteConfiguration != null
@@ -162,12 +186,29 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
             if (mainSiteConfiguration != null)
             {
-                SitecoreConfiguration.MainSiteConfiguration = SiteConfigurations.FirstOrDefault(x => x.Site.Name.ToLower() == mainSiteConfiguration.Name.ToLower());
+                SitecoreConfiguration.MainSiteConfigurationItem = mainSiteConfiguration;
             }
 
             SitecoreConfiguration.SearchEngines = !String.IsNullOrEmpty(globalConfigurationItem["Search Engines"])
                 ? globalConfigurationItem["Search Engines"].Split('|').ToList()
                 : new List<String>();
+
+            SitecoreConfiguration.ProcessedLanguages = new List<String>();
+
+            if (!String.IsNullOrEmpty(globalConfigurationItem["Processed languages"]))
+            {
+                var itemIds = globalConfigurationItem["Processed languages"].Split('|').ToList();
+
+                foreach (var itemId in itemIds)
+                {
+                    var item = Database.GetItem(itemId);
+
+                    if (item != null)
+                    {
+                        SitecoreConfiguration.ProcessedLanguages.Add(item.Name);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -236,8 +277,16 @@ namespace Sitecore.SharedSource.DynamicSitemap
             return result;
         }
 
+        /// <summary>
+        /// Generates sitemaps index
+        /// </summary>
         protected void GenerateSitemapsIndex()
         {
+            if (!DynamicSitemapConfiguration.UseSitemapsIndexFile)
+            {
+                return;
+            }
+
             var encoding = Encoding.UTF8;
             StringWriterWithEncoding stringWriter = new StringWriterWithEncoding(encoding);
 
@@ -338,8 +387,18 @@ namespace Sitecore.SharedSource.DynamicSitemap
                     }
                 }
             }
+
+            if (sitemapSiteConfiguration.ItemsProcessor != null)
+            {
+                var urlItems = sitemapSiteConfiguration.ItemsProcessor.ProcessItems(sitemapSiteConfiguration);
+
+                foreach (var urlItem in urlItems)
+                {
+                    GenerateUrlElement(urlItem, sitemapSiteConfiguration, xml);
+                }
+            }
         }
-        
+
         /// <summary>
         /// Prepares dynamic items - items accessed by wildcard
         /// </summary>
@@ -413,20 +472,47 @@ namespace Sitecore.SharedSource.DynamicSitemap
             xml.WriteStartElement("url");
             xml.WriteElementString("loc", url);
 
-            var lastModified = item.Statistics.Updated.ToString("yyyy-MM-ddThh:mm:sszzz");
+            if (item != null)
+            {
+                var lastModified = item.Statistics.Updated.ToString("yyyy-MM-ddThh:mm:sszzz");
+
+                xml.WriteElementString("lastmod", lastModified);
+
+                String changeFrequency = sitemapSiteConfiguration.GetChangeFrequency(item);
+                if (changeFrequency != String.Empty)
+                {
+                    xml.WriteElementString("changefreq", changeFrequency);
+                }
+
+                String priority = sitemapSiteConfiguration.GetPriority(item);
+                if (priority != String.Empty)
+                {
+                    xml.WriteElementString("priority", priority);
+                }
+            }
+            
+            xml.WriteEndElement();
+        }
+
+        protected void GenerateUrlElement(UrlElement urlElement, SitemapSiteConfiguration sitemapSiteConfiguration, XmlTextWriter xml)
+        {
+            sitemapSiteConfiguration.ItemsCount++;
+
+            xml.WriteStartElement("url");
+            xml.WriteElementString("loc", urlElement.Location);
+            
+            var lastModified = urlElement.LastModification.ToString("yyyy-MM-ddThh:mm:sszzz");
 
             xml.WriteElementString("lastmod", lastModified);
-
-            String changeFrequency = sitemapSiteConfiguration.GetChangeFrequency(item);
-            if (changeFrequency != String.Empty)
+            
+            if (urlElement.ChangeFrequency != String.Empty)
             {
-                xml.WriteElementString("changefreq", changeFrequency);
+                xml.WriteElementString("changefreq", urlElement.ChangeFrequency);
             }
-
-            String priority = sitemapSiteConfiguration.GetPriority(item);
-            if (priority != String.Empty)
+            
+            if (urlElement.Priority != String.Empty)
             {
-                xml.WriteElementString("priority", priority);
+                xml.WriteElementString("priority", urlElement.Priority);
             }
 
             xml.WriteEndElement();

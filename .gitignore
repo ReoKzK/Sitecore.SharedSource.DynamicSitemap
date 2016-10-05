@@ -6,3 +6,5 @@ packages/
 Sitecore.SharedSource.DynamicSitemap.Tests/obj/
 Sitecore.SharedSource.DynamicSitemap.Tests/bin/
 Libraries/
+Sitecore.SharedSource.DynamicSitemap.ItemsProcessor/obj/
+Sitecore.SharedSource.DynamicSitemap.ItemsProcessor/bin/

@@ -3,6 +3,7 @@ using Sitecore.Globalization;
 using Sitecore.Links;
 using Sitecore.SharedSource.DynamicSitemap.Configuration;
 using Sitecore.SharedSource.DynamicSitemap.Constants;
+using Sitecore.SharedSource.DynamicSitemap.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,6 +66,17 @@ namespace Sitecore.SharedSource.DynamicSitemap.Model
         public Language Language { get; set; }
 
         /// <summary>
+        /// Configuration Language
+        /// </summary>
+        public String LanguageName
+        {
+            get
+            {
+                return Language != null ? Language.Name : String.Empty;
+            }
+        }
+
+        /// <summary>
         /// Sitemap file name
         /// </summary>
         public String SitemapFileName { get; set; }
@@ -110,6 +122,16 @@ namespace Sitecore.SharedSource.DynamicSitemap.Model
         public String PriorityDefaultValue { get; private set; }
 
         /// <summary>
+        /// Items processor type to load
+        /// </summary>
+        public String ItemsProcessorTypeToLoad { get; private set; }
+
+        /// <summary>
+        /// Items processor 
+        /// </summary>
+        public IItemsProcessor ItemsProcessor { get; set; }
+
+        /// <summary>
         /// Items count
         /// </summary>
         public int ItemsCount { get; set; }
@@ -142,10 +164,13 @@ namespace Sitecore.SharedSource.DynamicSitemap.Model
                         ? ServerHost
                         : Site.HostName;
                 }
-                
-                url = !url.StartsWith("http://") ? "http://" + url : url;
 
-                url += SitemapFilePath;
+                url = url.Replace("//", "/");
+                url = !url.StartsWith("http://") 
+                    ? "http://" + url 
+                    : url;
+                
+                url += SitemapFilePath.Replace("//", "/");
 
                 return url;
             }
@@ -199,6 +224,7 @@ namespace Sitecore.SharedSource.DynamicSitemap.Model
 
             SitemapFileName = configurationItem["Sitemap File Name"];
             ForceHttps = configurationItem["Force HTTPS"] == "1";
+            ItemsProcessorTypeToLoad = configurationItem["Type to load"];
 
             Site = Sitecore.Configuration.Factory.GetSite(configurationItem.Name.ToLower());
             Language = configurationItem.Language;
