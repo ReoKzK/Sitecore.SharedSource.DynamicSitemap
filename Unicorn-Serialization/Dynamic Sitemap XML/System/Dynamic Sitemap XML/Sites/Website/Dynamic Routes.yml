@@ -1,0 +1,18 @@
+﻿---
+ID: "d7b38a87-d3b2-45b4-9f93-df6e3d722a84"
+Parent: "a5c9e136-4ae0-4b0b-8d9c-bfad7ebcaf68"
+Template: "c385f256-f2f5-4feb-a22f-896dbdf76863"
+Path: /sitecore/system/Modules/Dynamic Sitemap XML/Sites/Website/Dynamic Routes
+DB: master
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 200
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160210T120912Z

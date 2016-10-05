@@ -1,0 +1,14 @@
+﻿---
+ID: "1c318413-c851-4a78-8c43-dd3fa2d26cad"
+Parent: "0bf5a8c7-bf2f-45ed-a8ab-3e4348309a9a"
+Template: "c385f256-f2f5-4feb-a22f-896dbdf76863"
+Path: /sitecore/templates/Branches/Dynamic Sitemap XML/Site Configuration/$name/Dynamic Routes
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160206T133044Z

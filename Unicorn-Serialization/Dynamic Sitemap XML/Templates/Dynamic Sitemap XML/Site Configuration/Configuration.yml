@@ -1,0 +1,17 @@
+﻿---
+ID: "904362c4-7a63-4765-88dd-98134ea185f6"
+Parent: "1d9ed890-8aef-470b-9354-b418711bbe4c"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Dynamic Sitemap XML/Site Configuration/Configuration
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160126T132709Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: sitecore\admin

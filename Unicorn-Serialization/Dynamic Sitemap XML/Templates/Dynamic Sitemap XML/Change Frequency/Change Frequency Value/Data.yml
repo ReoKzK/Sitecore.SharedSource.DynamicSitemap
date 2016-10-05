@@ -1,0 +1,17 @@
+﻿---
+ID: "325ac25e-68c1-442f-9562-79c487bc8238"
+Parent: "5badc027-144b-4155-a5a8-8fdc475db62b"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Dynamic Sitemap XML/Change Frequency/Change Frequency Value/Data
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160206T132023Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: sitecore\admin

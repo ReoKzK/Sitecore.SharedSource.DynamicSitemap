@@ -1,0 +1,17 @@
+﻿---
+ID: "ef3476f5-c7b1-4101-b284-127190b43914"
+Parent: "7e6b48a3-bd98-4786-ad75-cbc469b4988c"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Dynamic Sitemap XML/Priority/Priority For Templates/Configuration
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160206T144101Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: sitecore\admin

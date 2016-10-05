@@ -1,0 +1,29 @@
+﻿---
+ID: "1c1d0e28-d0df-4694-af50-000f35f9d7ba"
+Parent: "1d9ed890-8aef-470b-9354-b418711bbe4c"
+Template: "1d9ed890-8aef-470b-9354-b418711bbe4c"
+Path: /sitecore/templates/Dynamic Sitemap XML/Site Configuration/__Standard Values
+DB: master
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Type: TreelistEx
+  Value: |
+    {C385F256-F2F5-4FEB-A22F-896DBDF76863}
+    {6E82C74A-5940-473B-8B60-CBB9D79EDB2D}
+    {FEDC5E17-4E3E-4057-B191-9D3EFC486277}
+- ID: "fd4e2050-186c-4375-8b99-e8a85dd7436e"
+  Hint: __Enable item fallback
+  Type: Checkbox
+  Value: 1
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160204T152822Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: sitecore\admin

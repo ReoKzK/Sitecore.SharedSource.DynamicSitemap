@@ -1,0 +1,20 @@
+﻿---
+ID: "389ad958-d388-4ea6-bcd2-f8dfb4efac0a"
+Parent: "a8029e82-e5fc-4350-92ec-75bb8e8f9792"
+Template: "bafcd634-f023-462e-a5b8-b4d569701f2c"
+Path: /sitecore/system/Modules/Dynamic Sitemap XML/Search Engines/Yahoo
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160203T145414Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: sitecore\admin
+    - ID: "6a65c50b-1a08-469c-aaa8-c2dce4ff4612"
+      Hint: Sitemap Submission Uri
+      Value: "http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap="

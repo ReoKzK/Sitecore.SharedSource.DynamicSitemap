@@ -1,0 +1,40 @@
+﻿---
+ID: "a5c9e136-4ae0-4b0b-8d9c-bfad7ebcaf68"
+Parent: "892b82c0-3de5-478b-b3c4-4e472e3dcd51"
+Template: "1d9ed890-8aef-470b-9354-b418711bbe4c"
+Path: /sitecore/system/Modules/Dynamic Sitemap XML/Sites/Website
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "0c9b7b52-5e8c-4750-ad38-430708c16b07"
+      Hint: Default Priority
+      Value: 0.4
+    - ID: "1eeb9feb-1d08-4f4c-ac74-61d8811fd677"
+      Hint: Type to load
+      Value: Sitecore.SharedSource.DynamicSitemap.ItemsProcessor.SampleItemsProcessor, Sitecore.SharedSource.DynamicSitemap.ItemsProcessor
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160210T121031Z
+    - ID: "7e606b34-0942-40d8-a0ef-ee7ebbc52dad"
+      Hint: Included Templates
+      Type: Treelist
+      Value: |
+        {5DF21668-FE89-4763-B77E-43DD1D8AD20E}
+        {804B99A2-B18E-4B86-A862-4D0270D4DEAB}
+        {C2198DA4-C89F-45D9-AF1A-E24C97F83398}
+        {B3B0CC2F-C5B6-4810-B6AC-9F9CB5F6A85D}
+        {24EBFFC0-27F0-4F18-A425-74D62F21609E}
+        {4CB22DB7-F488-4B34-9B38-BDFED05F7DBA}
+    - ID: "7eb86738-13fa-408c-9395-62f87e33d6a6"
+      Hint: Default Change Frequency
+      Value: "{8EC0A486-B6DD-4234-9F6F-CB401B644ABB}"
+    - ID: "91a6f73f-857b-4ce0-9284-1abaaac60206"
+      Hint: Root Item
+      Value: "{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}"
+    - ID: "ed09938b-7071-4e57-8468-e713c5150827"
+      Hint: Search Engines
+      Type: Multilist
+      Value: "{7AA7EA09-9818-4EF3-9A4B-8B75D9C83F3C}"

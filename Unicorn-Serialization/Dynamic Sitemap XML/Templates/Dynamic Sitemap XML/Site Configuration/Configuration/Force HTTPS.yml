@@ -1,0 +1,25 @@
+﻿---
+ID: "c93b13cd-b1ce-4c39-8c65-1aa05041b8aa"
+Parent: "904362c4-7a63-4765-88dd-98134ea185f6"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Dynamic Sitemap XML/Site Configuration/Configuration/Force HTTPS
+DB: master
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: Checkbox
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 500
+Languages:
+- Language: en
+  Fields:
+  - ID: "9541e67d-ce8c-4225-803d-33f7f29f09ef"
+    Hint: __Short description
+    Value: Make sure that all links will be generated as https
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160707T201520Z
