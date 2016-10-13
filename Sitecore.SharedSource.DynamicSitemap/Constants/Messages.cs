@@ -18,5 +18,7 @@ namespace Sitecore.SharedSource.DynamicSitemap.Constants
 
         public static readonly String SitemapSubmitterCannotSubmit = Label + "Cannot submit sitemap to \"{0}\" - {1}";
         public static readonly String SitemapSubmitterExceptionWhileSubmit = Label + "Search engine submission \"{0}\" returns an error - {1} \n\n{2}";
+
+        public static readonly String CannotLoadItemsProcessor = Label + "Cannot load ItemsProcessor type \"{0}\"";
     }
 }

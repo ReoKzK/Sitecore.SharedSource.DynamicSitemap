@@ -139,6 +139,8 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
                         sitemapSiteConfiguration.SitemapFilePath = DynamicSitemapConfiguration.SitemapConfigurationOutputFolder + "/" + sitemapSiteConfiguration.SitemapFileName;
 
+                        // - Load ItemsProcessor -
+
                         if (!String.IsNullOrWhiteSpace(sitemapSiteConfiguration.ItemsProcessorTypeToLoad))
                         {
                             var loader = new ItemsProcessorLoader();
@@ -151,7 +153,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
                             else
                             {
-                                //log
+                                Sitecore.Diagnostics.Log.Warn(String.Format(Messages.CannotLoadItemsProcessor, sitemapSiteConfiguration.ItemsProcessorTypeToLoad), this);
                             }
                         }
                         
