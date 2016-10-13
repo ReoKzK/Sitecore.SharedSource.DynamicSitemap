@@ -36,46 +36,13 @@ namespace Sitecore.SharedSource.DynamicSitemap
             if (!Context.ClientPage.IsEvent)
             {
                 this.RefreshButton.Click = "RefreshButtonClick";
-
-                Border border = Context.ClientPage.FindControl("Content") as Border;
-
-                DynamicSitemapGenerator dynamicSitemapGenerator = new DynamicSitemapGenerator();
-                dynamicSitemapGenerator.ReadConfigurations();
-
-                foreach (var config in dynamicSitemapGenerator.SiteConfigurations)
-                {
-                    var newBorder = new Border()
-                    {
-                        Border = "1px solid #d9d9d9",
-                        Padding = "5px 15px"
-                    };
-
-                    var literal = new Border()
-                    {
-                        InnerHtml = "Site name: " + config.Site.Name,
-                        Width = 200,
-                        Float = "left",
-                        Padding = "10px 0px;"
-                    };
-
-                    var button = new Button()
-                    {
-                        Header = "Refresh Sitemap",
-                        Click = "RefreshButtonClick"
-                    };
-
-                    newBorder.Controls.Add(literal);
-                    newBorder.Controls.Add(button);
-                    
-                    border.Controls.Add(newBorder);
-                }
             }
         }
 
         /// <summary>
         /// Refresh button method
         /// </summary>
-        protected void RefreshButtonClick()
+        public void RefreshButtonClick()
         {
             DynamicSitemapGenerator dynamicSitemapGenerator = new DynamicSitemapGenerator();
             dynamicSitemapGenerator.RegenerateSitemap(this, new EventArgs());
