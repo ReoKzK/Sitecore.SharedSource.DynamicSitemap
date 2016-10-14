@@ -11,6 +11,7 @@ namespace Sitecore.SharedSource.DynamicSitemap.Constants
 
         public static readonly String ExecutionInterrupted = Label + "There are no sitemap configurations, execution interrupted.";
         public static readonly String NoConfigurations = Label + "There are no sitemap configurations.";
+        public static readonly String NoGlobalScConfiguration = Label + "There is no global Sitecore configuration Item.";
 
         public static readonly String ExceptionWhileBuilding = Label + "Exception while building sitemap for {0} - {1}\n\n{2}";
 

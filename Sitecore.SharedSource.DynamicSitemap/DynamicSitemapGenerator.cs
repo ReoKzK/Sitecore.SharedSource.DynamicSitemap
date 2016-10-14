@@ -177,6 +177,13 @@ namespace Sitecore.SharedSource.DynamicSitemap
         protected void ReadGlobalSitecoreConfiguration()
         {
             Item globalConfigurationItem = Database.GetItem(DynamicSitemapConfiguration.SitemapConfigurationItemPath + "/Configuration");
+
+            if (globalConfigurationItem == null)
+            {
+                Sitecore.Diagnostics.Log.Error(Messages.NoGlobalScConfiguration, this);
+                return;
+            }
+
             Item mainSiteConfiguration = null;
 
             if (globalConfigurationItem["Main Site Configuration"] != String.Empty)
