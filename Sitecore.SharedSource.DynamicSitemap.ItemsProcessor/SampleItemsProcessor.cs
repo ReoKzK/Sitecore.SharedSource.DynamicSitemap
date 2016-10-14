@@ -14,12 +14,21 @@ namespace Sitecore.SharedSource.DynamicSitemap.ItemsProcessor
     /// </summary>
     public class SampleItemsProcessor : IItemsProcessor
     {
+        /// <summary>
+        /// Method that will process your items
+        /// </summary>
+        /// <param name="sitemapSiteConfiguration">Sitemap site configuration to which items will be added</param>
+        /// <returns>List of your items</returns>
         public List<UrlElement> ProcessItems(SitemapSiteConfiguration sitemapSiteConfiguration)
         {
             var items = new List<UrlElement>();
 
+            // - Let's check for specific language -
+
             if (sitemapSiteConfiguration.LanguageName == "en")
             {
+                // - Add your own elements packed into object of UrlElement class -
+
                 items.Add(new UrlElement
                 {
                     Location = "http://mysite.com/some-custom-static-page.html",
@@ -29,6 +38,8 @@ namespace Sitecore.SharedSource.DynamicSitemap.ItemsProcessor
                 });
             }
             
+            // - Return collected items -
+
             return items;
         }
     }

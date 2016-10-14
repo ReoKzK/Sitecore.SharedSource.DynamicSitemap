@@ -32,10 +32,34 @@ namespace Sitecore.SharedSource.DynamicSitemap
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            
+            this.RefreshButton.Click = "RefreshButtonClick";
 
-            if (!Context.ClientPage.IsEvent)
+            Border border = Context.ClientPage.FindControl("Content") as Border;
+
+            DynamicSitemapGenerator dynamicSitemapGenerator = new DynamicSitemapGenerator();
+            dynamicSitemapGenerator.ReadConfigurations();
+
+            foreach (var config in dynamicSitemapGenerator.SiteConfigurations)
             {
-                this.RefreshButton.Click = "RefreshButtonClick";
+                var newBorder = new Border()
+                {
+                    Border = "1px solid #d9d9d9",
+                    Padding = "5px 15px",
+                    Margin = "0 0 2px 0"
+                };
+
+                var literal = new Border()
+                {
+                    InnerHtml = String.Format("Site name: <strong>{0}</strong>, Language: <strong>{1}</strong>", config.Site.Name, config.LanguageName),
+                    Width = 200,
+                    //Float = "left",
+                    Padding = "10px 0px;"
+                };
+                    
+                newBorder.Controls.Add(literal);
+
+                border.Controls.Add(newBorder);
             }
         }
 
