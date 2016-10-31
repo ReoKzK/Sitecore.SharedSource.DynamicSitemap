@@ -354,13 +354,19 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// <returns></returns>
         protected List<Item> GetItems(String rootPath, Language language)
         {
-            var items = Database.SelectItems("fast:" + rootPath + "//*")
-                .Where(x => x.Language == language)
-                .ToList();
-                
-            // - Add root Item -
-            items.Add(Database.SelectSingleItem("fast:" + rootPath));
+            var items = new List<Item>();
 
+            using (new LanguageSwitcher(language.Name))
+            {
+                // - Add root Item -
+                items.Add(Database.SelectSingleItem(rootPath));
+
+                items.AddRange(
+                    Database.SelectItems("fast:" + rootPath + "//*")
+                        .ToList()
+                );
+            }
+            
             return items;
         }
 
