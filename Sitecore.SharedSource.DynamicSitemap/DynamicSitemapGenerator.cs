@@ -359,15 +359,25 @@ namespace Sitecore.SharedSource.DynamicSitemap
             using (new LanguageSwitcher(language.Name))
             {
                 // - Add root Item -
-                items.Add(Database.SelectSingleItem(rootPath));
+                var rootItem = this.Database.SelectSingleItem(rootPath);
+                if (rootItem == null)
+                {
+                    return new List<Item>();
+                }
 
-                items.AddRange(
-                    Database.SelectItems("fast:" + rootPath + "//*")
-                        .ToList()
-                );
+                items.Add(rootItem);
+                this.AppendItems(items, rootItem);
             }
-            
             return items;
+        }
+
+        public void AppendItems(List<Item> itemList, Item item)
+        {
+            foreach (Item childItem in item.Children)
+            {
+                itemList.Add(childItem);
+                AppendItems(itemList, childItem);
+            }
         }
 
         /// <summary>
