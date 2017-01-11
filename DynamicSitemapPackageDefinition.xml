@@ -1,0 +1,210 @@
+<project>
+  <Metadata>
+    <metadata>
+      <PackageName>SitecoreDynamicSitemapXML</PackageName>
+      <Author />
+      <Version>1.X</Version>
+      <Revision />
+      <License />
+      <Comment />
+      <Attributes />
+      <Readme />
+      <Publisher />
+      <PostStep />
+      <PackageID />
+    </metadata>
+  </Metadata>
+  <SaveProject>True</SaveProject>
+  <Sources>
+    <xitems>
+      <Entries>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/{F213021F-A6FF-4C16-B246-587F90EBC818}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Change Frequency/{BF5DFBF4-651F-47DF-954F-4333C73E7D6D}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Change Frequency/Change Frequency Definitions/__Standard Values/{F518E3A7-2BDE-4F63-BEF1-2F66E7424AB1}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Change Frequency/Change Frequency Definitions/{6E82C74A-5940-473B-8B60-CBB9D79EDB2D}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Change Frequency/Change Frequency For Items/{9551D9F7-A66A-4A49-A705-B0B2918C0EB5}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Change Frequency/Change Frequency For Items/Configuration/{2ABDE922-F2B7-4F65-81C3-4190B16CD29E}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Change Frequency/Change Frequency For Items/Configuration/Change Frequency/{D56C31B6-9679-4F17-A7DC-33770A8670C5}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Change Frequency/Change Frequency For Items/Configuration/Items/{3539477E-B7EA-41E1-BF01-CA72327EFB24}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Change Frequency/Change Frequency For Templates/{A1F7C913-E331-4172-BD26-0621DFBCD529}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Change Frequency/Change Frequency For Templates/Configuration/{776DFD9E-EBE7-4030-B90A-C5C9B6C862FD}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Change Frequency/Change Frequency For Templates/Configuration/Change Frequency/{317E4499-84B4-40EB-95A0-8861A5E34937}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Change Frequency/Change Frequency For Templates/Configuration/Templates/{99B430FE-FE8B-4177-BAC1-2546AB970EC7}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Change Frequency/Change Frequency Value/__Standard Values/{90AAA66C-4223-4FA5-9AC2-045974AA3123}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Change Frequency/Change Frequency Value/{5BADC027-144B-4155-A5A8-8FDC475DB62B}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Change Frequency/Change Frequency Value/Data/{325AC25E-68C1-442F-9562-79C487BC8238}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Change Frequency/Change Frequency Value/Data/Value/{5915B020-9030-4B22-BE4F-C3C1F8C06D32}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Dynamic Routes/__Standard Values/{9208D16D-4D09-4729-9EE9-DE7FF590EFC4}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Dynamic Routes/{C385F256-F2F5-4FEB-A22F-896DBDF76863}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Dynamic Routing/{821B9FA0-BDF0-489D-9E98-DD549416AAA6}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Dynamic Routing/Configuration/{8EE05D58-8870-4A2B-8D57-F0E616175A0B}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Dynamic Routing/Configuration/Data Source/{89E45929-E450-4819-841E-0A4E9BF7810B}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Dynamic Routing/Configuration/Dynamic Item/{3D633D45-8129-4D3D-ADB2-E0B98F640FAD}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Dynamic Routing/Configuration/Is disabled/{4024CF61-3AF0-4A1D-80C9-461FA3C4C857}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Global Configuration/{8E0BF0CC-49A9-4D96-9B50-17C353A6C03E}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Global Configuration/Languages/{744EEE27-828F-4B69-8DB1-7B9003DE3326}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Global Configuration/Languages/Processed languages/{908969F5-CE44-484C-85BE-6F168A62B1DD}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Global Configuration/Sitemap Index/{A147887A-9F9F-4706-82E5-F61BD171CEBF}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Global Configuration/Sitemap Index/Main Site Configuration/{BA54ACD6-7F8F-4373-9ED0-510850EC76FA}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Global Configuration/Sitemap Index/Search Engines/{20F9F33C-42AD-4BB8-939B-4F40703830E8}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Multilevel Dynamic Routing/{F6FFAF82-A2DC-45E4-84C5-CC3AE030CC73}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Priority/{CE2879F2-28AA-43F3-B643-F080128B05C9}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Priority/Priority Definitions/__Standard Values/{1190F977-D0A9-49F4-A275-A7E0AF418967}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Priority/Priority Definitions/{FEDC5E17-4E3E-4057-B191-9D3EFC486277}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Priority/Priority For Items/__Standard Values/{E12E056A-30D4-44E1-9951-D152E97E82FF}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Priority/Priority For Items/{0C77276D-A087-4613-94ED-4E90ADB1495E}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Priority/Priority For Items/Configuration/{B43CC35D-CE66-4FA1-B82C-E2DA5C018180}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Priority/Priority For Items/Configuration/Items/{5E4EB20E-A845-4C5B-8497-F3DB3C0994B1}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Priority/Priority For Items/Configuration/Priority/{BF783F93-1E04-413A-A8E4-F8DA900A59CA}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Priority/Priority For Templates/__Standard Values/{C1669C3B-8767-4237-96DB-0467BF878AB7}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Priority/Priority For Templates/{7E6B48A3-BD98-4786-AD75-CBC469B4988C}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Priority/Priority For Templates/Configuration/{EF3476F5-C7B1-4101-B284-127190B43914}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Priority/Priority For Templates/Configuration/Priority/{7B69BFCD-3A78-429F-B7E3-256741E8EAD6}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Priority/Priority For Templates/Configuration/Templates/{CB2972D4-F982-4286-94C1-72ACFBF083F1}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Search Engine/{BAFCD634-F023-462E-A5B8-B4D569701F2C}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Search Engine/General/{4037F35A-F695-465A-B444-AE0AC5602FD3}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Search Engine/General/Sitemap Submission Uri/{6A65C50B-1A08-469C-AAA8-C2DCE4FF4612}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Site Configuration/__Standard Values/{1C1D0E28-D0DF-4694-AF50-000F35F9D7BA}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Site Configuration/{1D9ED890-8AEF-470B-9354-B418711BBE4C}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Site Configuration/Additional Attributes/{EE7E50F4-25A7-420B-986F-061BF98D31BD}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Site Configuration/Additional Attributes/Default Change Frequency/{7EB86738-13FA-408C-9395-62F87E33D6A6}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Site Configuration/Additional Attributes/Default Priority/{0C9B7B52-5E8C-4750-AD38-430708C16B07}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Site Configuration/Additional logic/{B57185A0-6093-436D-A8C5-130A76C7D8BB}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Site Configuration/Additional logic/Type to load/{1EEB9FEB-1D08-4F4C-AC74-61D8811FD677}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Site Configuration/Configuration/{904362C4-7A63-4765-88DD-98134EA185F6}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Site Configuration/Configuration/Excluded Items/{B3B691B9-AC00-4BDC-981B-3ECAEA3E8DBE}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Site Configuration/Configuration/Excluded Paths/{A45E9D67-263D-4614-8D5E-13517EEE9DEB}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Site Configuration/Configuration/Force HTTPS/{C93B13CD-B1CE-4C39-8C65-1AA05041B8AA}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Site Configuration/Configuration/Included Base Templates/{B6C2E413-BB87-45F7-B993-C17E27C9C89F}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Site Configuration/Configuration/Included Templates/{7E606B34-0942-40D8-A0EF-EE7EBBC52DAD}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Site Configuration/Configuration/Root Item/{91A6F73F-857B-4CE0-9284-1ABAAAC60206}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Site Configuration/Configuration/Search Engines/{ED09938B-7071-4E57-8468-E713C5150827}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Site Configuration/Configuration/Server Host/{BBB9BBF4-DE3C-451B-964A-E21C0EF1FAA6}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Dynamic Sitemap XML/Site Configuration/Configuration/Sitemap File Name/{0D83BFDB-F011-4D98-976D-E7FD4E63CDF2}/invariant/0</x-item>
+      </Entries>
+      <SkipVersions>False</SkipVersions>
+      <Converter>
+        <ItemToEntryConverter>
+          <Transforms />
+        </ItemToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>templates</Name>
+    </xitems>
+    <xitems>
+      <Entries>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/{EAB6D9CB-DC0C-44A6-8188-E737B33DC87A}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/Change Frequency Values/{5C00C26D-1320-418C-B31A-EBBA4239CC67}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/Change Frequency Values/always/{5E4CFDE7-536F-4DD4-89F8-F2D34E7888C0}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/Change Frequency Values/daily/{8EC0A486-B6DD-4234-9F6F-CB401B644ABB}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/Change Frequency Values/hourly/{8652F9AE-5552-4110-8281-B73700FE1C06}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/Change Frequency Values/monthly/{C7AB1374-00CB-4D8B-8AD3-CB715FF93EB8}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/Change Frequency Values/never/{84CD0502-D31D-490E-8601-624D8D341AEF}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/Change Frequency Values/weekly/{D2981729-1C93-462D-B21F-785056EA99E8}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/Change Frequency Values/yearly/{8A0DDF78-74E9-4AB6-9ADE-BFF03EC9A633}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/Configuration/{2D727CB6-702F-4196-BE85-C242782F8623}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/Search Engines/{A8029E82-E5FC-4350-92EC-75BB8E8F9792}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/Search Engines/Bing/{65A9ACE4-56F2-452A-AB28-367426107D5A}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/Search Engines/Google/{7AA7EA09-9818-4EF3-9A4B-8B75D9C83F3C}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/Search Engines/Yahoo/{389AD958-D388-4EA6-BCD2-F8DFB4EFAC0A}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/Sites/{892B82C0-3DE5-478B-B3C4-4E472E3DCD51}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/Sites/Website/{A5C9E136-4AE0-4B0B-8D9C-BFAD7EBCAF68}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/Sites/Website/Change Frequency Definitions/{6975D5E6-DD3F-4A69-9378-33615A98F5E9}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/Sites/Website/Dynamic Routes/{D7B38A87-D3B2-45B4-9F93-DF6E3D722A84}/invariant/0</x-item>
+        <x-item>/master/sitecore/system/Modules/Dynamic Sitemap XML/Sites/Website/Priority Definitions/{90AF3881-6098-4DAB-B365-0E285D8964B5}/invariant/0</x-item>
+      </Entries>
+      <SkipVersions>False</SkipVersions>
+      <Converter>
+        <ItemToEntryConverter>
+          <Transforms />
+        </ItemToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>System</Name>
+    </xitems>
+    <xitems>
+      <Entries>
+        <x-item>/master/sitecore/templates/Branches/Dynamic Sitemap XML/{20F9E1CA-39FC-4B43-B513-462885848FEE}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Branches/Dynamic Sitemap XML/Site Configuration/$name/{0BF5A8C7-BF2F-45ED-A8AB-3E4348309A9A}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Branches/Dynamic Sitemap XML/Site Configuration/$name/Change Frequency Definitions/{74C3215B-7DA3-4271-ABC1-FA81C97B19C1}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Branches/Dynamic Sitemap XML/Site Configuration/$name/Dynamic Routes/{1C318413-C851-4A78-8C43-DD3FA2D26CAD}/invariant/0</x-item>
+        <x-item>/master/sitecore/templates/Branches/Dynamic Sitemap XML/Site Configuration/{A788E475-E9E6-4C54-885D-E434A1B2AFCC}/invariant/0</x-item>
+      </Entries>
+      <SkipVersions>False</SkipVersions>
+      <Converter>
+        <ItemToEntryConverter>
+          <Transforms />
+        </ItemToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>Branches</Name>
+    </xitems>
+    <xitems>
+      <Entries>
+        <x-item>/core/sitecore/layout/Layouts/Applications/DynamicSitemapManager/{F9057740-AAEA-42F3-A256-F4785BEEEEA5}/invariant/0</x-item>
+      </Entries>
+      <SkipVersions>False</SkipVersions>
+      <Converter>
+        <ItemToEntryConverter>
+          <Transforms />
+        </ItemToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>core layouts</Name>
+    </xitems>
+    <xitems>
+      <Entries>
+        <x-item>/core/sitecore/content/Applications/DynamicSitemapManager/{9077272A-0E99-4047-8585-3CA88F9F8FBC}/invariant/0</x-item>
+      </Entries>
+      <SkipVersions>False</SkipVersions>
+      <Converter>
+        <ItemToEntryConverter>
+          <Transforms />
+        </ItemToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>core applications</Name>
+    </xitems>
+    <xitems>
+      <Entries>
+        <x-item>/core/sitecore/content/Documents and settings/All users/Start menu/Programs/Dynamic Sitemap Manager/{EDE30158-D13A-44CE-A54C-716991FC2FB2}/invariant/0</x-item>
+      </Entries>
+      <SkipVersions>False</SkipVersions>
+      <Converter>
+        <ItemToEntryConverter>
+          <Transforms />
+        </ItemToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>core start menu programs</Name>
+    </xitems>
+    <xitems>
+      <Entries>
+        <x-item>/core/sitecore/content/Documents and settings/All users/Start menu/Left/Dynamic Sitemap Manager/{0D3568A4-BD7A-4E29-B126-E9EC8FF50310}/invariant/0</x-item>
+      </Entries>
+      <SkipVersions>False</SkipVersions>
+      <Converter>
+        <ItemToEntryConverter>
+          <Transforms />
+        </ItemToEntryConverter>
+      </Converter>
+      <Include />
+      <Exclude />
+      <Name>start menu left</Name>
+    </xitems>
+  </Sources>
+  <Converter>
+    <TrivialConverter>
+      <Transforms />
+    </TrivialConverter>
+  </Converter>
+  <Include />
+  <Exclude />
+  <Name />
+</project>
