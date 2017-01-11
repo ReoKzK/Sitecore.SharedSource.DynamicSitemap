@@ -6,7 +6,6 @@ using Sitecore.SharedSource.DynamicSitemap.Configuration;
 using Sitecore.SharedSource.DynamicSitemap.Constants;
 using Sitecore.SharedSource.DynamicSitemap.Extensions;
 using Sitecore.SharedSource.DynamicSitemap.Helpers;
-using Sitecore.SharedSource.DynamicSitemap.Interfaces;
 using Sitecore.SharedSource.DynamicSitemap.Logic;
 using Sitecore.SharedSource.DynamicSitemap.Model;
 using Sitecore.SharedSource.DynamicSitemap.Modules;
@@ -38,7 +37,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// Sitemap index
         /// </summary>
         protected SitemapIndexConfiguration SitemapIndex { get; set; }
-        
+
         /// <summary>
         /// Sitemap file name format
         /// </summary>
@@ -59,7 +58,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
                 return Sitecore.Configuration.Factory.GetDatabase(DynamicSitemapConfiguration.WorkingDatabase);
             }
         }
-        
+
         /// <summary>
         /// Dynamic Sitemap Generator
         /// </summary>
@@ -252,7 +251,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
             StringWriterWithEncoding stringWriter = new StringWriterWithEncoding(encoding);
 
             // - Creating the XML Header -
-           
+
             var xml = new XmlTextWriter(stringWriter);
             xml.WriteStartDocument();
             xml.WriteStartElement("urlset", DynamicSitemapConfiguration.XmlnsTpl);
@@ -269,7 +268,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
             catch (Exception exc)
             {
-                Diagnostics.Log.Error(String.Format(Messages.ExceptionWhileBuilding, sitemapSiteConfiguration.Site.Name, exc.Message, exc.StackTrace) , this);
+                Diagnostics.Log.Error(String.Format(Messages.ExceptionWhileBuilding, sitemapSiteConfiguration.Site.Name, exc.Message, exc.StackTrace), this);
             }
 
             finally
@@ -335,13 +334,13 @@ namespace Sitecore.SharedSource.DynamicSitemap
                 xml.Flush();
 
                 String result = stringWriter.ToString();
-                
+
                 string path = MainUtil.MapPath("/" + this.SitemapIndex.FileName);
 
                 StreamWriter streamWriter = new StreamWriter(path, false);
                 streamWriter.Write(result);
                 streamWriter.Close();
-                
+
                 Diagnostics.Log.Info("DynamicSitemapGenerator: Sitemap index generated - in path " + path + ", " + sitemapsCount + " sitemaps attached", this);
             }
         }
@@ -389,16 +388,18 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// <param name="xml">Xml Text Writer object</param>
         public void ProcessItems(List<Item> items, SitemapSiteConfiguration sitemapSiteConfiguration, UrlOptions options, XmlTextWriter xml)
         {
+            var templateCache = new Dictionary<Guid, bool>();
+
             foreach (var item in items)
             {
                 if (item.Versions.Count > 0)
                 {
                     if (DynamicSitemapHelper.IsWildcard(item))
                     {
-                        this.PrepareDynamicItems(item, sitemapSiteConfiguration, xml);
+                        this.PrepareDynamicItems(item, sitemapSiteConfiguration, xml, templateCache);
                     }
 
-                    else if (this.IsIncluded(item, sitemapSiteConfiguration))
+                    else if (this.IsIncluded(item, sitemapSiteConfiguration, templateCache))
                     {
                         var url = LinkManager.GetItemUrl(item, options);
                         url = DynamicSitemapHelper.EnsureHttpPrefix(url, sitemapSiteConfiguration.ForceHttps);
@@ -430,7 +431,8 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// <param name="wildcardItem">Wildcard Item</param>
         /// <param name="sitemapSiteConfiguration">Sitemap site configuration</param>
         /// <param name="xml">XmlTextWriter object</param>
-        protected void PrepareDynamicItems(Item wildcardItem, SitemapSiteConfiguration sitemapSiteConfiguration, XmlTextWriter xml)
+        /// <param name="templateCache"></param>
+        protected void PrepareDynamicItems(Item wildcardItem, SitemapSiteConfiguration sitemapSiteConfiguration, XmlTextWriter xml, Dictionary<Guid, bool> templateCache)
         {
             var dynamicRoute = sitemapSiteConfiguration.DynamicRoutes.SingleOrDefault(x => x["Dynamic Item"] == wildcardItem.ID.ToString());
 
@@ -447,7 +449,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
                     foreach (var item in datasource.Children.ToList())
                     {
-                        if (item.Versions.Count > 0 && this.IsIncluded(item, sitemapSiteConfiguration, true))
+                        if (item.Versions.Count > 0 && this.IsIncluded(item, sitemapSiteConfiguration, templateCache, true))
                         {
                             var lastSegment = item.Name;
                             lastSegment = options.LowercaseUrls ? lastSegment.ToLower() : lastSegment;
@@ -515,7 +517,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
                     xml.WriteElementString("priority", priority);
                 }
             }
-            
+
             xml.WriteEndElement();
         }
 
@@ -525,16 +527,16 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
             xml.WriteStartElement("url");
             xml.WriteElementString("loc", urlElement.Location);
-            
+
             var lastModified = urlElement.LastModification.ToString("yyyy-MM-ddThh:mm:sszzz");
 
             xml.WriteElementString("lastmod", lastModified);
-            
+
             if (urlElement.ChangeFrequency != String.Empty)
             {
                 xml.WriteElementString("changefreq", urlElement.ChangeFrequency);
             }
-            
+
             if (urlElement.Priority != String.Empty)
             {
                 xml.WriteElementString("priority", urlElement.Priority);
@@ -547,18 +549,46 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// Checks if Item can be included in sitemap
         /// </summary>
         /// <param name="item">Item</param>
+        /// <param name="sitemapSiteConfiguration"></param>
+        /// <param name="templateCache"></param>
         /// <param name="isDataSourceItem">Is item used only in wildcard</param>
         /// <returns>true if included</returns>
-        protected bool IsIncluded(Item item, SitemapSiteConfiguration sitemapSiteConfiguration, bool isDataSourceItem = false)
+        protected bool IsIncluded(Item item, SitemapSiteConfiguration sitemapSiteConfiguration, Dictionary<Guid, bool> templateCache, bool isDataSourceItem = false)
         {
             return sitemapSiteConfiguration.ExcludedItems.All(x => x != item.ID.ToString())
-                && sitemapSiteConfiguration.IncludedTemplates.Contains(item.TemplateID.ToString())
+                && this.MatchesTemplates(sitemapSiteConfiguration, item, templateCache)
                 && !sitemapSiteConfiguration.ExcludedItemPaths.Any(x => item.Paths.FullPath.StartsWith(x.Paths.FullPath) && item.Paths.FullPath.Equals(x.Paths.FullPath))
                 && (item.Paths.FullPath.StartsWith(sitemapSiteConfiguration.RootItem.Paths.FullPath)
                     || item.Paths.FullPath.Equals(sitemapSiteConfiguration.RootItem.Paths.FullPath)
                     || isDataSourceItem);
         }
-        
+
+        private bool MatchesTemplates(SitemapSiteConfiguration sitemapSiteConfiguration, Item item, Dictionary<Guid, bool> templateCache)
+        {
+            var templateId = item.TemplateID.Guid;
+            
+            if (templateCache.ContainsKey(templateId))
+            {
+                return templateCache[templateId];
+            }
+
+            bool matchesTemplate;
+            if (sitemapSiteConfiguration.IncludedTemplates.Contains(templateId))
+            {
+                // matches the allowed templates
+                matchesTemplate = true;
+            }
+            else
+            {
+                // slow - need local caching
+                var baseTemplates = TemplateHelper.GetBaseTemplates(item);
+                matchesTemplate = sitemapSiteConfiguration.IncludedBaseTemplates.Any(guid => baseTemplates.Contains(guid));
+            }
+
+            templateCache.Add(templateId, matchesTemplate);
+            return matchesTemplate;
+        }
+
         /// <summary>
         /// Ensures that sitemaps directory exists
         /// </summary>
@@ -570,7 +600,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
                 Directory.CreateDirectory(dirPath);
             }
         }
-        
+
         /// <summary>
         /// Registers sitemaps to robots.txt
         /// </summary>
