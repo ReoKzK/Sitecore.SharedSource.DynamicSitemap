@@ -55,4 +55,4 @@ This project includes a web project that can be published to the relevant versio
 - refreshRobotsFile (true or false) - indicates that robots.txt file will be updated with references to sitemap xml files
 - xmlnsTpl - sitemap module schema used for the XML sitemap
 - database - the database from which to pull items for generating the sitemap
-- productionEnvironment - (true or false) determines whether the sitemap should be submitted to the search engines or not
+- submitToSearchEngine - (true or false) determines whether the sitemap should be submitted to the search engines or not
