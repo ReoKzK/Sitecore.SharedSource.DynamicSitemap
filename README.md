@@ -11,11 +11,10 @@ It has two main assumptions:
 	
 	Code functionality should be extensible and overridable. It should be easy to extend or override functionality, without decompiling and copy-pasting a lot of code.
 
--
-
 Module was based on the original Sitemap XML module
 	
-###New features:
+### Features:
+- Include items based on Base Templates (a.k.a inherited templates)
 - Configurations for sites controlled from Content Editor
 - Defining <changefreq> and <priority> tags for templates and specified items
 - Language fallback for configuration items
@@ -31,6 +30,22 @@ Module was based on the original Sitemap XML module
 	
 ###Installation:
 - Install zip package using Sitecore Package Installer
+
+###Building the project
+This project includes a web project that can be published to the relevant version of Sitecore (refer to the Sitecore Nuget Reference)
+
+- Install a fresh instance of Sitecore. SIM (Sitecore Instance Manager) is recommended.
+- Update the _/App_Config/Include/Unicorn/Unicorn.CustomSerializationFolder.config_ to point to the _Unicorn-Serialization_ folder
+```
+<targetDataStore type="Rainbow.Storage.SerializationFileSystemDataStore, Rainbow">
+	<patch:attribute name="physicalRootPath">C:\projects\Sitecore.SharedSource.DynamicSitemap\Unicorn-Serialization\$(configurationName)</patch:attribute>
+</targetDataStore>
+```
+- Publish the web project to the newly installed version of Sitecore 
+- Run Unicorn sync http://mysite.local/Unicorn.aspx
+- Upload and Open the _DynamicSitemapPackageDefinition.xml_ using the Package Manager in the Sitecore shell
+- Make changes to the package definition as needed. *Make sure DynamicSitemapPackageDefinition.xml is updated in source control*
+- Generate and download ZIP
 	
 ###Configuration:
 - Dynamic Sitemap XML provides Sitecore.SharedSource.DynamicSitemap.config configuration file installed in /App_Config/Include directory.
