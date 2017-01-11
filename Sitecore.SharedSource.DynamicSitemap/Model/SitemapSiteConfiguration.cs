@@ -4,6 +4,7 @@ using Sitecore.Links;
 using Sitecore.SharedSource.DynamicSitemap.Configuration;
 using Sitecore.SharedSource.DynamicSitemap.Constants;
 using Sitecore.SharedSource.DynamicSitemap.Interfaces;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -152,7 +153,7 @@ namespace Sitecore.SharedSource.DynamicSitemap.Model
                     urlOptions.SiteResolving = true;
                     urlOptions.Site = Site;
                     urlOptions.AlwaysIncludeServerUrl = true;
-                    
+
                     var startItem = _configurationItem.Database.GetItem(Site.ContentStartPath);
 
                     url = Sitecore.Links.LinkManager.GetItemUrl(startItem, urlOptions);
@@ -160,16 +161,12 @@ namespace Sitecore.SharedSource.DynamicSitemap.Model
 
                 else
                 {
-                    url = !String.IsNullOrEmpty(ServerHost)
-                        ? ServerHost
-                        : Site.HostName;
+                    url = !String.IsNullOrEmpty(ServerHost) ? ServerHost : Site.HostName;
                 }
 
                 url = url.Replace("//", "/");
-                url = !url.StartsWith("http://") 
-                    ? "http://" + url 
-                    : url;
-                
+                url = !url.StartsWith("http://") ? "http://" + url : url;
+
                 url += SitemapFilePath.Replace("//", "/");
 
                 return url;
@@ -197,20 +194,20 @@ namespace Sitecore.SharedSource.DynamicSitemap.Model
             ServerHost = configurationItem["Server Host"];
 
             IncludedTemplates = !String.IsNullOrEmpty(configurationItem["Included Templates"])
-                ? configurationItem["Included Templates"].Split('|').ToList()
-                : new List<String>();
+                                    ? configurationItem["Included Templates"].Split('|').ToList()
+                                    : new List<String>();
 
             ExcludedItems = !String.IsNullOrEmpty(configurationItem["Excluded Items"])
-                ? configurationItem["Excluded Items"].Split('|').ToList()
-                : new List<String>();
+                                ? configurationItem["Excluded Items"].Split('|').ToList()
+                                : new List<String>();
 
             ExcludedPaths = !String.IsNullOrEmpty(configurationItem["Excluded Paths"])
-                ? configurationItem["Excluded Paths"].Split('|').ToList()
-                : new List<String>();
+                                ? configurationItem["Excluded Paths"].Split('|').ToList()
+                                : new List<String>();
 
             SearchEngines = !String.IsNullOrEmpty(configurationItem["Search Engines"])
-                ? configurationItem["Search Engines"].Split('|').ToList()
-                : new List<String>();
+                                ? configurationItem["Search Engines"].Split('|').ToList()
+                                : new List<String>();
 
             ExcludedItemPaths = new List<Item>();
 
@@ -242,11 +239,14 @@ namespace Sitecore.SharedSource.DynamicSitemap.Model
         private void ReadPriorities()
         {
             PriorityDefaultValue = _configurationItem["Default Priority"];
-            
+
             PrioritiesForTemplates = new Dictionary<String, String>();
             PrioritiesForItems = new Dictionary<String, String>();
 
-            Item prioritiesFolder = _configurationItem.Database.GetItem(_configurationItem.Paths.FullPath + "/" + DynamicSitemapConfiguration.SitemapConfigurationPrioritiesFolderName);
+            Item prioritiesFolder =
+                _configurationItem.Database.GetItem(
+                    _configurationItem.Paths.FullPath + "/"
+                    + DynamicSitemapConfiguration.SitemapConfigurationPrioritiesFolderName);
 
             if (prioritiesFolder != null && prioritiesFolder.HasChildren)
             {
@@ -296,14 +296,18 @@ namespace Sitecore.SharedSource.DynamicSitemap.Model
         {
             var defaultChangeFrequency = _configurationItem.Database.GetItem(_configurationItem["Change Frequency"]);
 
-            ChangeFrequencyDefaultValue = defaultChangeFrequency != null && defaultChangeFrequency["Value"] != String.Empty
-                ? defaultChangeFrequency["Value"]
-                : String.Empty;
+            ChangeFrequencyDefaultValue = defaultChangeFrequency != null
+                                          && defaultChangeFrequency["Value"] != String.Empty
+                                              ? defaultChangeFrequency["Value"]
+                                              : String.Empty;
 
             ChangeFrequenciesForTemplates = new Dictionary<String, String>();
             ChangeFrequenciesForItems = new Dictionary<String, String>();
 
-            Item changeFrequencyFolder = _configurationItem.Database.GetItem(_configurationItem.Paths.FullPath + "/" + DynamicSitemapConfiguration.SitemapConfigurationChangeFrequenciesFolderName);
+            Item changeFrequencyFolder =
+                _configurationItem.Database.GetItem(
+                    _configurationItem.Paths.FullPath + "/"
+                    + DynamicSitemapConfiguration.SitemapConfigurationChangeFrequenciesFolderName);
 
             if (changeFrequencyFolder != null && changeFrequencyFolder.HasChildren)
             {
@@ -356,8 +360,11 @@ namespace Sitecore.SharedSource.DynamicSitemap.Model
         protected void ReadDynamicRoutes()
         {
             DynamicRoutes = new List<Item>();
-            
-            Item dynamicRoutesFolder = _configurationItem.Database.GetItem(_configurationItem.Paths.FullPath + "/" + DynamicSitemapConfiguration.SitemapConfigurationRoutesFolderName);
+
+            Item dynamicRoutesFolder =
+                _configurationItem.Database.GetItem(
+                    _configurationItem.Paths.FullPath + "/"
+                    + DynamicSitemapConfiguration.SitemapConfigurationRoutesFolderName);
 
             if (dynamicRoutesFolder != null && dynamicRoutesFolder.HasChildren)
             {
@@ -374,7 +381,8 @@ namespace Sitecore.SharedSource.DynamicSitemap.Model
         /// <returns>String</returns>
         public override string ToString()
         {
-            return "Sitemap configuration for site '" + Site.Name + "' (language " + Language.Name  + ") - generated as " + SitemapFilePath + " (items count: " + ItemsCount + ")";
+            return "Sitemap configuration for site '" + Site.Name + "' (language " + Language.Name + ") - generated as "
+                   + SitemapFilePath + " (items count: " + ItemsCount + ")";
         }
 
         /// <summary>

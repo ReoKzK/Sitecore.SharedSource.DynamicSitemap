@@ -3,6 +3,7 @@ using Sitecore.Data.Items;
 using Sitecore.SharedSource.DynamicSitemap.Configuration;
 using Sitecore.SharedSource.DynamicSitemap.Constants;
 using Sitecore.SharedSource.DynamicSitemap.Model;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,7 +32,7 @@ namespace Sitecore.SharedSource.DynamicSitemap.Logic
         /// Site configurations list
         /// </summary>
         protected List<SitemapSiteConfiguration> SiteConfigurations { get; set; }
-        
+
         /// <summary>
         /// Sitemap index
         /// </summary>
@@ -39,7 +40,10 @@ namespace Sitecore.SharedSource.DynamicSitemap.Logic
 
         protected List<SubmissionUrlsConfig> SubmissionUrlsConfig { get; set; }
 
-        public SitemapSubmitter(DynamicSitemapSitecoreConfiguration config, List<SitemapSiteConfiguration> siteConfigurations, Database database)
+        public SitemapSubmitter(
+            DynamicSitemapSitecoreConfiguration config,
+            List<SitemapSiteConfiguration> siteConfigurations,
+            Database database)
         {
             SitecoreConfiguration = config;
             SiteConfigurations = siteConfigurations;
@@ -133,13 +137,20 @@ namespace Sitecore.SharedSource.DynamicSitemap.Logic
 
                     if (httpWebResponse.StatusCode != HttpStatusCode.OK)
                     {
-                        Diagnostics.Log.Error(String.Format(Messages.SitemapSubmitterCannotSubmit, engine, httpWebResponse.StatusDescription), this);
+                        Diagnostics.Log.Error(
+                            String.Format(
+                                Messages.SitemapSubmitterCannotSubmit,
+                                engine,
+                                httpWebResponse.StatusDescription),
+                            this);
                     }
                 }
 
                 catch (Exception exc)
                 {
-                    Diagnostics.Log.Warn(String.Format(Messages.SitemapSubmitterExceptionWhileSubmit, text, exc.Message, exc.StackTrace), this);
+                    Diagnostics.Log.Warn(
+                        String.Format(Messages.SitemapSubmitterExceptionWhileSubmit, text, exc.Message, exc.StackTrace),
+                        this);
                 }
             }
         }

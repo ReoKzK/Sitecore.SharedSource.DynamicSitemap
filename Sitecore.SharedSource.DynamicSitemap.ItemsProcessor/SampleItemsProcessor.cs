@@ -1,8 +1,10 @@
 ﻿using Sitecore.SharedSource.DynamicSitemap.Interfaces;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using Sitecore.SharedSource.DynamicSitemap;
 using Sitecore.SharedSource.DynamicSitemap.Model;
 
@@ -29,15 +31,16 @@ namespace Sitecore.SharedSource.DynamicSitemap.ItemsProcessor
             {
                 // - Add your own elements packed into object of UrlElement class -
 
-                items.Add(new UrlElement
-                {
-                    Location = "http://mysite.com/some-custom-static-page.html",
-                    Priority = "0.7",
-                    LastModification = new DateTime(2016, 03, 01),
-                    ChangeFrequency = "yearly"
-                });
+                items.Add(
+                    new UrlElement
+                        {
+                            Location = "http://mysite.com/some-custom-static-page.html",
+                            Priority = "0.7",
+                            LastModification = new DateTime(2016, 03, 01),
+                            ChangeFrequency = "yearly"
+                        });
             }
-            
+
             // - Return collected items -
 
             return items;

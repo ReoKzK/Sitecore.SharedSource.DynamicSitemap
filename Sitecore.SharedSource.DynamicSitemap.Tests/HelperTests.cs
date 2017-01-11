@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
+
 using Sitecore.SharedSource.DynamicSitemap.Helpers;
+
 using System;
 
 namespace Sitecore.SharedSource.DynamicSitemap.Tests

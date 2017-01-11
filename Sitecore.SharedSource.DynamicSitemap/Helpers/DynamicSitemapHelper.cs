@@ -1,5 +1,6 @@
 ﻿using Sitecore.Data.Items;
 using Sitecore.SharedSource.DynamicSitemap.Extensions;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +27,8 @@ namespace Sitecore.SharedSource.DynamicSitemap.Helpers
             UriBuilder builder = new UriBuilder(uri);
 
             serverHost = serverHost.Replace("http://", String.Empty)
-                                   .Replace("https://", String.Empty)
-                                   .Replace("/", String.Empty);
+                .Replace("https://", String.Empty)
+                .Replace("/", String.Empty);
 
             builder.Host = serverHost;
 
@@ -78,12 +79,18 @@ namespace Sitecore.SharedSource.DynamicSitemap.Helpers
         {
             var result = false;
             var layoutField = new Data.Fields.LayoutField(item.Fields[FieldIDs.LayoutField]);
-            if (!layoutField.InnerField.HasValue || string.IsNullOrEmpty(layoutField.Value)) return false;
+            if (!layoutField.InnerField.HasValue || string.IsNullOrEmpty(layoutField.Value))
+            {
+                return false;
+            }
             var layout = Layouts.LayoutDefinition.Parse(layoutField.Value);
             foreach (var deviceObj in layout.Devices)
             {
                 var device = deviceObj as Layouts.DeviceDefinition;
-                if (device == null) return false;
+                if (device == null)
+                {
+                    return false;
+                }
                 if (device.Renderings.Count > 0)
                 {
                     result = true;

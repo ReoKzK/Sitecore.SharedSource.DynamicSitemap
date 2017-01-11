@@ -2,6 +2,7 @@
 using Sitecore.SharedSource.DynamicSitemap.Configuration;
 using Sitecore.Web.UI.HtmlControls;
 using Sitecore.Web.UI.Sheer;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            
+
             this.RefreshButton.Click = "RefreshButtonClick";
 
             Border border = Context.ClientPage.FindControl("Content") as Border;
@@ -43,20 +44,24 @@ namespace Sitecore.SharedSource.DynamicSitemap
             foreach (var config in dynamicSitemapGenerator.SiteConfigurations)
             {
                 var newBorder = new Border()
-                {
-                    Border = "1px solid #d9d9d9",
-                    Padding = "5px 15px",
-                    Margin = "0 0 2px 0"
-                };
+                                    {
+                                        Border = "1px solid #d9d9d9",
+                                        Padding = "5px 15px",
+                                        Margin = "0 0 2px 0"
+                                    };
 
                 var literal = new Border()
-                {
-                    InnerHtml = String.Format("Site name: <strong>{0}</strong>, Language: <strong>{1}</strong>", config.Site.Name, config.LanguageName),
-                    Width = 200,
-                    //Float = "left",
-                    Padding = "10px 0px;"
-                };
-                    
+                                  {
+                                      InnerHtml =
+                                          String.Format(
+                                              "Site name: <strong>{0}</strong>, Language: <strong>{1}</strong>",
+                                              config.Site.Name,
+                                              config.LanguageName),
+                                      Width = 200,
+                                      //Float = "left",
+                                      Padding = "10px 0px;"
+                                  };
+
                 newBorder.Controls.Add(literal);
 
                 border.Controls.Add(newBorder);
@@ -77,7 +82,9 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
             if (dynamicSitemapGenerator.SiteConfigurations == null || !dynamicSitemapGenerator.SiteConfigurations.Any())
             {
-                this.Message.Text = "No sitemap configurations found under " + DynamicSitemapConfiguration.SitemapConfigurationItemPath + ". Please create one or more configuration nodes and try refreshing again.";
+                this.Message.Text = "No sitemap configurations found under "
+                                    + DynamicSitemapConfiguration.SitemapConfigurationItemPath
+                                    + ". Please create one or more configuration nodes and try refreshing again.";
                 DynamicSitemapManagerForm.RefreshPanel("MainPanel");
             }
 
@@ -89,7 +96,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
                 {
                     message += String.Format("<li> &bull; {0}</li>", configuration);
                 }
-                
+
                 message += "</ul>";
 
                 this.Message.Text = message;

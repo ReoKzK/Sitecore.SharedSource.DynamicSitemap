@@ -1,4 +1,5 @@
 ﻿using Sitecore.Links;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace Sitecore.SharedSource.DynamicSitemap.Model
             get
             {
                 var url = ServerHost;
-                
+
                 url = !url.StartsWith("http://") ? "http://" + url : url;
 
                 url = Sitecore.StringUtil.EnsurePostfix('/', url);

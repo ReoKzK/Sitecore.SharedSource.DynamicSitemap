@@ -1,4 +1,5 @@
 ﻿using Sitecore.SharedSource.DynamicSitemap.Interfaces;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,6 @@ namespace Sitecore.SharedSource.DynamicSitemap.Modules
 
             catch (Exception e)
             {
-
                 throw;
             }
 
