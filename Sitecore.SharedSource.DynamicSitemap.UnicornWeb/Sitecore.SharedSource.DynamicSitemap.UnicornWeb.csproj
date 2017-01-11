@@ -111,6 +111,16 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sitecore.SharedSource.DynamicSitemap.ItemsProcessor\Sitecore.SharedSource.DynamicSitemap.ItemsProcessor.csproj">
+      <Project>{21b0ab34-57d2-41ed-8e6d-c22dd14b0577}</Project>
+      <Name>Sitecore.SharedSource.DynamicSitemap.ItemsProcessor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sitecore.SharedSource.DynamicSitemap\Sitecore.SharedSource.DynamicSitemap.csproj">
+      <Project>{57a4efdd-889f-47cf-a47b-b65f813cb234}</Project>
+      <Name>Sitecore.SharedSource.DynamicSitemap</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
