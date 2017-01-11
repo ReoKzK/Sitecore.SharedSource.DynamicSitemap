@@ -93,6 +93,9 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\Sitecore.SharedSource.DynamicSitemap\sitecore modules\Shell\Dynamic Sitemap XML\DynamicSitemapManager.xml">
+      <Link>sitecore modules\Shell\Dynamic Sitemap XML\DynamicSitemapManager.xml</Link>
+    </Content>
     <Content Include="App_Config\Include\Rainbow.config" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.UI.config" />
     <Content Include="App_Config\Include\Unicorn\Unicorn.DataProvider.config" />
