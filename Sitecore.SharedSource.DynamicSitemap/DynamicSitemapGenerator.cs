@@ -551,19 +551,12 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// <returns>true if included</returns>
         protected bool IsIncluded(Item item, SitemapSiteConfiguration sitemapSiteConfiguration, bool isDataSourceItem = false)
         {
-            var result = false;
-
-            if (!sitemapSiteConfiguration.ExcludedItems.Any(x => x == item.ID.ToString())
+            return sitemapSiteConfiguration.ExcludedItems.All(x => x != item.ID.ToString())
                 && sitemapSiteConfiguration.IncludedTemplates.Contains(item.TemplateID.ToString())
                 && !sitemapSiteConfiguration.ExcludedItemPaths.Any(x => item.Paths.FullPath.StartsWith(x.Paths.FullPath) && item.Paths.FullPath.Equals(x.Paths.FullPath))
                 && (item.Paths.FullPath.StartsWith(sitemapSiteConfiguration.RootItem.Paths.FullPath)
                     || item.Paths.FullPath.Equals(sitemapSiteConfiguration.RootItem.Paths.FullPath)
-                    || isDataSourceItem)) // - datasource items can be out of root item
-            {
-                result = true;
-            }
-
-            return result;
+                    || isDataSourceItem);
         }
         
         /// <summary>
