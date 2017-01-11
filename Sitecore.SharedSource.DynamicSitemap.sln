@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.Dynam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap.ItemsProcessor", "Sitecore.SharedSource.DynamicSitemap.ItemsProcessor\Sitecore.SharedSource.DynamicSitemap.ItemsProcessor.csproj", "{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap.UnicornWeb", "Sitecore.SharedSource.DynamicSitemap.UnicornWeb\Sitecore.SharedSource.DynamicSitemap.UnicornWeb.csproj", "{36D13671-06AC-40EC-8825-EAA9223FC229}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36D13671-06AC-40EC-8825-EAA9223FC229}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36D13671-06AC-40EC-8825-EAA9223FC229}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36D13671-06AC-40EC-8825-EAA9223FC229}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36D13671-06AC-40EC-8825-EAA9223FC229}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
