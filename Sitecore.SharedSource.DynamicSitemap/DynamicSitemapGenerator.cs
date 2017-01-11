@@ -95,7 +95,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
             RegisterSitemapToRobotsFile();
 
-            if (DynamicSitemapConfiguration.IsProductionEnvironment)
+            if (DynamicSitemapConfiguration.SubmitToSearchEngine)
             {
                 var submitter = new SitemapSubmitter(SitecoreConfiguration, SiteConfigurations, Database);
                 submitter.SubmitSitemapsToSearchEngines();
