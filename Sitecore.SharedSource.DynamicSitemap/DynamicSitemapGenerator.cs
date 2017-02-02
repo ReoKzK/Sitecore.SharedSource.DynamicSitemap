@@ -1,12 +1,12 @@
 ﻿using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
+using Sitecore.IO;
 using Sitecore.Links;
 using Sitecore.SharedSource.DynamicSitemap.Configuration;
 using Sitecore.SharedSource.DynamicSitemap.Constants;
 using Sitecore.SharedSource.DynamicSitemap.Extensions;
 using Sitecore.SharedSource.DynamicSitemap.Helpers;
-using Sitecore.SharedSource.DynamicSitemap.Interfaces;
 using Sitecore.SharedSource.DynamicSitemap.Logic;
 using Sitecore.SharedSource.DynamicSitemap.Model;
 using Sitecore.SharedSource.DynamicSitemap.Modules;
@@ -38,7 +38,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// Sitemap index
         /// </summary>
         protected SitemapIndexConfiguration SitemapIndex { get; set; }
-        
+
         /// <summary>
         /// Sitemap file name format
         /// </summary>
@@ -59,13 +59,13 @@ namespace Sitecore.SharedSource.DynamicSitemap
                 return Sitecore.Configuration.Factory.GetDatabase(DynamicSitemapConfiguration.WorkingDatabase);
             }
         }
-        
+
         /// <summary>
         /// Dynamic Sitemap Generator
         /// </summary>
         public DynamicSitemapGenerator()
         {
-            SiteConfigurations = new List<SitemapSiteConfiguration>();
+            this.SiteConfigurations = new List<SitemapSiteConfiguration>();
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void RegenerateSitemap(object sender, System.EventArgs args)
+        public void RegenerateSitemap(object sender, EventArgs args)
         {
             if (args == null)
             {
@@ -82,22 +82,22 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
             EnsureSitemapsDirectoryExists();
 
-            ReadConfigurations();
+            this.ReadConfigurations();
 
-            if (SiteConfigurations.Count == 0)
+            if (this.SiteConfigurations.Count == 0)
             {
-                Sitecore.Diagnostics.Log.Warn(Messages.ExecutionInterrupted, this);
+                Diagnostics.Log.Warn(Messages.ExecutionInterrupted, this);
                 return;
             }
 
-            GenerateSitemaps();
-            GenerateSitemapsIndex();
+            this.GenerateSitemaps();
+            this.GenerateSitemapsIndex();
 
-            RegisterSitemapToRobotsFile();
+            this.RegisterSitemapToRobotsFile();
 
-            if (DynamicSitemapConfiguration.IsProductionEnvironment)
+            if (DynamicSitemapConfiguration.SubmitToSearchEngine)
             {
-                var submitter = new SitemapSubmitter(SitecoreConfiguration, SiteConfigurations, Database);
+                var submitter = new SitemapSubmitter(this.SitecoreConfiguration, this.SiteConfigurations, this.Database);
                 submitter.SubmitSitemapsToSearchEngines();
             }
         }
@@ -107,21 +107,21 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// </summary>
         public void ReadConfigurations()
         {
-            ReadGlobalSitecoreConfiguration();
+            this.ReadGlobalSitecoreConfiguration();
 
-            Item[] configurationItems = Database.SelectItems(DynamicSitemapConfiguration.SitemapConfigurationItemPath + DynamicSitemapConfiguration.SitemapConfigurationSitesFolderName + "/*[@@templateid='" + TemplateIds.SiteConfigurationTemplateId + "']");
+            Item[] configurationItems = this.Database.SelectItems(DynamicSitemapConfiguration.SitemapConfigurationItemPath + DynamicSitemapConfiguration.SitemapConfigurationSitesFolderName + "/*[@@templateid='" + TemplateIds.SiteConfigurationTemplateId + "']");
 
             if (configurationItems.Count() == 0)
             {
-                Sitecore.Diagnostics.Log.Warn(Messages.NoConfigurations, this);
+                Diagnostics.Log.Warn(Messages.NoConfigurations, this);
                 return;
             }
 
-            SiteConfigurations = new List<SitemapSiteConfiguration>();
+            this.SiteConfigurations = new List<SitemapSiteConfiguration>();
 
             foreach (var configurationItem in configurationItems)
             {
-                var languageItems = configurationItem.Languages.Where(x => SitecoreConfiguration.ProcessedLanguages.Contains(x.Name)).ToList();
+                var languageItems = configurationItem.Languages.Where(x => this.SitecoreConfiguration.ProcessedLanguages.Contains(x.Name)).ToList();
 
                 foreach (var languageItem in languageItems)
                 {
@@ -135,7 +135,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
                         sitemapSiteConfiguration.SitemapFileName = sitemapSiteConfiguration.SitemapFileName != String.Empty
                             ? sitemapSiteConfiguration.SitemapFileName
-                            : String.Format(_sitemapFileNameFormat, site, languageItem.Name.ToLower());
+                            : String.Format(this._sitemapFileNameFormat, site, languageItem.Name.ToLower());
 
                         sitemapSiteConfiguration.SitemapFilePath = DynamicSitemapConfiguration.SitemapConfigurationOutputFolder + "/" + sitemapSiteConfiguration.SitemapFileName;
 
@@ -153,22 +153,28 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
                             else
                             {
-                                Sitecore.Diagnostics.Log.Warn(String.Format(Messages.CannotLoadItemsProcessor, sitemapSiteConfiguration.ItemsProcessorTypeToLoad), this);
+                                Diagnostics.Log.Warn(String.Format(Messages.CannotLoadItemsProcessor, sitemapSiteConfiguration.ItemsProcessorTypeToLoad), this);
                             }
                         }
-                        
-                        SiteConfigurations.Add(sitemapSiteConfiguration);
+
+                        this.SiteConfigurations.Add(sitemapSiteConfiguration);
                     }
                 }
             }
 
-            SitecoreConfiguration.MainSiteConfiguration = SiteConfigurations.FirstOrDefault(x => x.Site.Name.ToLower() == SitecoreConfiguration.MainSiteConfigurationItem.Name.ToLower());
+            this.SitecoreConfiguration.MainSiteConfiguration = this.SiteConfigurations.FirstOrDefault(x => x.Site.Name.ToLower() == this.SitecoreConfiguration.MainSiteConfigurationItem.Name.ToLower());
 
-            SitemapIndex = new SitemapIndexConfiguration();
-            SitemapIndex.ServerHost = SitecoreConfiguration.MainSiteConfiguration != null
-                ? SitecoreConfiguration.MainSiteConfiguration.ServerHost
-                : SiteConfigurations.FirstOrDefault().ServerHost;
-            SitemapIndex.FileName = _sitemapIndexFileName;
+            this.SitemapIndex = new SitemapIndexConfiguration();
+
+            var siteConfiguration = this.SitecoreConfiguration.MainSiteConfiguration ?? this.SiteConfigurations.FirstOrDefault();
+
+            if (siteConfiguration != null)
+            {
+                this.SitemapIndex.ServerHost = siteConfiguration.ServerHost;
+                this.SitemapIndex.ForceHttps = siteConfiguration.ForceHttps;
+                this.SitemapIndex.TargetHostName = siteConfiguration.TargetHost;
+            }
+            this.SitemapIndex.FileName = this._sitemapIndexFileName;
         }
 
         /// <summary>
@@ -176,11 +182,11 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// </summary>
         protected void ReadGlobalSitecoreConfiguration()
         {
-            Item globalConfigurationItem = Database.GetItem(DynamicSitemapConfiguration.SitemapConfigurationItemPath + "/Configuration");
+            Item globalConfigurationItem = this.Database.GetItem(DynamicSitemapConfiguration.SitemapConfigurationItemPath + "/Configuration");
 
             if (globalConfigurationItem == null)
             {
-                Sitecore.Diagnostics.Log.Error(Messages.NoGlobalScConfiguration, this);
+                Diagnostics.Log.Error(Messages.NoGlobalScConfiguration, this);
                 return;
             }
 
@@ -188,21 +194,21 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
             if (globalConfigurationItem["Main Site Configuration"] != String.Empty)
             {
-                mainSiteConfiguration = Database.GetItem(globalConfigurationItem["Main Site Configuration"]);
+                mainSiteConfiguration = this.Database.GetItem(globalConfigurationItem["Main Site Configuration"]);
             }
 
-            SitecoreConfiguration = new DynamicSitemapSitecoreConfiguration();
+            this.SitecoreConfiguration = new DynamicSitemapSitecoreConfiguration();
 
             if (mainSiteConfiguration != null)
             {
-                SitecoreConfiguration.MainSiteConfigurationItem = mainSiteConfiguration;
+                this.SitecoreConfiguration.MainSiteConfigurationItem = mainSiteConfiguration;
             }
 
-            SitecoreConfiguration.SearchEngines = !String.IsNullOrEmpty(globalConfigurationItem["Search Engines"])
+            this.SitecoreConfiguration.SearchEngines = !String.IsNullOrEmpty(globalConfigurationItem["Search Engines"])
                 ? globalConfigurationItem["Search Engines"].Split('|').ToList()
                 : new List<String>();
 
-            SitecoreConfiguration.ProcessedLanguages = new List<String>();
+            this.SitecoreConfiguration.ProcessedLanguages = new List<String>();
 
             if (!String.IsNullOrEmpty(globalConfigurationItem["Processed languages"]))
             {
@@ -210,11 +216,11 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
                 foreach (var itemId in itemIds)
                 {
-                    var item = Database.GetItem(itemId);
+                    var item = this.Database.GetItem(itemId);
 
                     if (item != null)
                     {
-                        SitecoreConfiguration.ProcessedLanguages.Add(item.Name);
+                        this.SitecoreConfiguration.ProcessedLanguages.Add(item.Name);
                     }
                 }
             }
@@ -225,11 +231,11 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// </summary>
         protected void GenerateSitemaps()
         {
-            foreach (var sitemapSiteConfiguration in SiteConfigurations)
+            foreach (var sitemapSiteConfiguration in this.SiteConfigurations)
             {
-                var sitemapContent = BuildSitemap(sitemapSiteConfiguration);
+                var sitemapContent = this.BuildSitemap(sitemapSiteConfiguration);
 
-                string path = Sitecore.MainUtil.MapPath(sitemapSiteConfiguration.SitemapFilePath);
+                string path = FileUtil.MapPath(null, sitemapSiteConfiguration.SitemapFilePath);
 
                 StreamWriter streamWriter = new StreamWriter(path, false);
                 streamWriter.Write(sitemapContent);
@@ -246,13 +252,13 @@ namespace Sitecore.SharedSource.DynamicSitemap
         {
             var result = String.Empty;
 
-            var options = GetUrlOptions();
+            var options = this.GetUrlOptions();
 
             var encoding = Encoding.UTF8;
             StringWriterWithEncoding stringWriter = new StringWriterWithEncoding(encoding);
 
             // - Creating the XML Header -
-           
+
             var xml = new XmlTextWriter(stringWriter);
             xml.WriteStartDocument();
             xml.WriteStartElement("urlset", DynamicSitemapConfiguration.XmlnsTpl);
@@ -262,14 +268,14 @@ namespace Sitecore.SharedSource.DynamicSitemap
                 options.Site = sitemapSiteConfiguration.Site;
                 options.Language = sitemapSiteConfiguration.Language;
 
-                List<Item> items = GetItems(sitemapSiteConfiguration.Site.RootPath, sitemapSiteConfiguration.Language);
-                
-                ProcessItems(items, sitemapSiteConfiguration, options, xml);
+                List<Item> items = this.GetItems(sitemapSiteConfiguration.Site.RootPath, sitemapSiteConfiguration.Language);
+
+                this.ProcessItems(items, sitemapSiteConfiguration, options, xml);
             }
 
             catch (Exception exc)
             {
-                Sitecore.Diagnostics.Log.Error(String.Format(Messages.ExceptionWhileBuilding, sitemapSiteConfiguration.Site.Name, exc.Message, exc.StackTrace) , this);
+                Diagnostics.Log.Error(String.Format(Messages.ExceptionWhileBuilding, sitemapSiteConfiguration.Site.Name, exc.Message, exc.StackTrace), this);
             }
 
             finally
@@ -280,7 +286,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
                 result = stringWriter.ToString();
 
-                Sitecore.Diagnostics.Log.Info(String.Format(Messages.SitemapBuidSuccess, sitemapSiteConfiguration), this);
+                Diagnostics.Log.Info(String.Format(Messages.SitemapBuidSuccess, sitemapSiteConfiguration), this);
             }
 
             return result;
@@ -309,7 +315,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
             try
             {
-                foreach (var sitemap in SiteConfigurations)
+                foreach (var sitemap in this.SiteConfigurations)
                 {
                     xml.WriteStartElement("sitemap");
                     xml.WriteElementString("loc", sitemap.SitemapUrl);
@@ -325,7 +331,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
             catch (Exception exc)
             {
-                Sitecore.Diagnostics.Log.Error("DynamicSitemapGenerator: " + exc.Message + "\n\n" + exc.StackTrace, this);
+                Diagnostics.Log.Error("DynamicSitemapGenerator: " + exc.Message + "\n\n" + exc.StackTrace, this);
             }
 
             finally
@@ -335,14 +341,14 @@ namespace Sitecore.SharedSource.DynamicSitemap
                 xml.Flush();
 
                 String result = stringWriter.ToString();
-                
-                string path = Sitecore.MainUtil.MapPath("/" + SitemapIndex.FileName);
+
+                string path = MainUtil.MapPath("/" + this.SitemapIndex.FileName);
 
                 StreamWriter streamWriter = new StreamWriter(path, false);
                 streamWriter.Write(result);
                 streamWriter.Close();
-                
-                Sitecore.Diagnostics.Log.Info("DynamicSitemapGenerator: Sitemap index generated - in path " + path + ", " + sitemapsCount + " sitemaps attached", this);
+
+                Diagnostics.Log.Info("DynamicSitemapGenerator: Sitemap index generated - in path " + path + ", " + sitemapsCount + " sitemaps attached", this);
             }
         }
 
@@ -359,15 +365,25 @@ namespace Sitecore.SharedSource.DynamicSitemap
             using (new LanguageSwitcher(language.Name))
             {
                 // - Add root Item -
-                items.Add(Database.SelectSingleItem(rootPath));
+                var rootItem = this.Database.SelectSingleItem(rootPath);
+                if (rootItem == null)
+                {
+                    return new List<Item>();
+                }
 
-                items.AddRange(
-                    Database.SelectItems("fast:" + rootPath + "//*")
-                        .ToList()
-                );
+                items.Add(rootItem);
+                this.AppendItems(items, rootItem);
             }
-            
             return items;
+        }
+
+        public void AppendItems(List<Item> itemList, Item item)
+        {
+            foreach (Item childItem in item.Children)
+            {
+                itemList.Add(childItem);
+                this.AppendItems(itemList, childItem);
+            }
         }
 
         /// <summary>
@@ -379,16 +395,18 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// <param name="xml">Xml Text Writer object</param>
         public void ProcessItems(List<Item> items, SitemapSiteConfiguration sitemapSiteConfiguration, UrlOptions options, XmlTextWriter xml)
         {
+            var templateCache = new Dictionary<Guid, bool>();
+
             foreach (var item in items)
             {
                 if (item.Versions.Count > 0)
                 {
                     if (DynamicSitemapHelper.IsWildcard(item))
                     {
-                        PrepareDynamicItems(item, sitemapSiteConfiguration, xml);
+                        this.PrepareDynamicItems(item, sitemapSiteConfiguration, xml, templateCache);
                     }
 
-                    else if (IsIncluded(item, sitemapSiteConfiguration))
+                    else if (this.IsIncluded(item, sitemapSiteConfiguration, templateCache))
                     {
                         var url = LinkManager.GetItemUrl(item, options);
                         url = DynamicSitemapHelper.EnsureHttpPrefix(url, sitemapSiteConfiguration.ForceHttps);
@@ -398,7 +416,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
                             url = DynamicSitemapHelper.ReplaceHost(url, sitemapSiteConfiguration.ServerHost);
                         }
 
-                        GenerateUrlElement(url, item, sitemapSiteConfiguration, xml);
+                        this.GenerateUrlElement(url, item, sitemapSiteConfiguration, xml);
                     }
                 }
             }
@@ -409,7 +427,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
                 foreach (var urlItem in urlItems)
                 {
-                    GenerateUrlElement(urlItem, sitemapSiteConfiguration, xml);
+                    this.GenerateUrlElement(urlItem, sitemapSiteConfiguration, xml);
                 }
             }
         }
@@ -420,24 +438,25 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// <param name="wildcardItem">Wildcard Item</param>
         /// <param name="sitemapSiteConfiguration">Sitemap site configuration</param>
         /// <param name="xml">XmlTextWriter object</param>
-        protected void PrepareDynamicItems(Item wildcardItem, SitemapSiteConfiguration sitemapSiteConfiguration, XmlTextWriter xml)
+        /// <param name="templateCache"></param>
+        protected void PrepareDynamicItems(Item wildcardItem, SitemapSiteConfiguration sitemapSiteConfiguration, XmlTextWriter xml, Dictionary<Guid, bool> templateCache)
         {
             var dynamicRoute = sitemapSiteConfiguration.DynamicRoutes.SingleOrDefault(x => x["Dynamic Item"] == wildcardItem.ID.ToString());
 
             if (dynamicRoute != null)
             {
-                var datasource = Database.GetItem(dynamicRoute["Data Source"]);
+                var datasource = this.Database.GetItem(dynamicRoute["Data Source"]);
 
                 if (datasource != null && datasource.HasChildren)
                 {
-                    UrlOptions options = GetUrlOptions();
+                    UrlOptions options = this.GetUrlOptions();
                     options.Site = sitemapSiteConfiguration.Site;
 
                     var dynamicItemActualUrl = LinkManager.GetItemUrl(wildcardItem, options);
 
                     foreach (var item in datasource.Children.ToList())
                     {
-                        if (item.Versions.Count > 0 && IsIncluded(item, sitemapSiteConfiguration, true))
+                        if (item.Versions.Count > 0 && this.IsIncluded(item, sitemapSiteConfiguration, templateCache, true))
                         {
                             var lastSegment = item.Name;
                             lastSegment = options.LowercaseUrls ? lastSegment.ToLower() : lastSegment;
@@ -452,8 +471,8 @@ namespace Sitecore.SharedSource.DynamicSitemap
                             {
                                 url = DynamicSitemapHelper.ReplaceHost(url, sitemapSiteConfiguration.ServerHost);
                             }
-                            
-                            GenerateUrlElement(url, item, sitemapSiteConfiguration, xml);
+
+                            this.GenerateUrlElement(url, item, sitemapSiteConfiguration, xml);
                         }
                     }
                 }
@@ -505,7 +524,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
                     xml.WriteElementString("priority", priority);
                 }
             }
-            
+
             xml.WriteEndElement();
         }
 
@@ -515,16 +534,16 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
             xml.WriteStartElement("url");
             xml.WriteElementString("loc", urlElement.Location);
-            
+
             var lastModified = urlElement.LastModification.ToString("yyyy-MM-ddThh:mm:sszzz");
 
             xml.WriteElementString("lastmod", lastModified);
-            
+
             if (urlElement.ChangeFrequency != String.Empty)
             {
                 xml.WriteElementString("changefreq", urlElement.ChangeFrequency);
             }
-            
+
             if (urlElement.Priority != String.Empty)
             {
                 xml.WriteElementString("priority", urlElement.Priority);
@@ -537,37 +556,58 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// Checks if Item can be included in sitemap
         /// </summary>
         /// <param name="item">Item</param>
+        /// <param name="sitemapSiteConfiguration"></param>
+        /// <param name="templateCache"></param>
         /// <param name="isDataSourceItem">Is item used only in wildcard</param>
         /// <returns>true if included</returns>
-        protected bool IsIncluded(Item item, SitemapSiteConfiguration sitemapSiteConfiguration, bool isDataSourceItem = false)
+        protected bool IsIncluded(Item item, SitemapSiteConfiguration sitemapSiteConfiguration, Dictionary<Guid, bool> templateCache, bool isDataSourceItem = false)
         {
-            var result = false;
-
-            if (!sitemapSiteConfiguration.ExcludedItems.Any(x => x == item.ID.ToString())
-                && sitemapSiteConfiguration.IncludedTemplates.Contains(item.TemplateID.ToString())
+            return sitemapSiteConfiguration.ExcludedItems.All(x => x != item.ID.ToString())
+                && this.MatchesTemplates(sitemapSiteConfiguration, item, templateCache)
                 && !sitemapSiteConfiguration.ExcludedItemPaths.Any(x => item.Paths.FullPath.StartsWith(x.Paths.FullPath) && item.Paths.FullPath.Equals(x.Paths.FullPath))
                 && (item.Paths.FullPath.StartsWith(sitemapSiteConfiguration.RootItem.Paths.FullPath)
                     || item.Paths.FullPath.Equals(sitemapSiteConfiguration.RootItem.Paths.FullPath)
-                    || isDataSourceItem)) // - datasource items can be out of root item
+                    || isDataSourceItem);
+        }
+
+        private bool MatchesTemplates(SitemapSiteConfiguration sitemapSiteConfiguration, Item item, Dictionary<Guid, bool> templateCache)
+        {
+            var templateId = item.TemplateID.Guid;
+            
+            if (templateCache.ContainsKey(templateId))
             {
-                result = true;
+                return templateCache[templateId];
             }
 
-            return result;
+            bool matchesTemplate;
+            if (sitemapSiteConfiguration.IncludedTemplates.Contains(templateId))
+            {
+                // matches the allowed templates
+                matchesTemplate = true;
+            }
+            else
+            {
+                // slow - need local caching
+                var baseTemplates = TemplateHelper.GetBaseTemplates(item);
+                matchesTemplate = sitemapSiteConfiguration.IncludedBaseTemplates.Any(guid => baseTemplates.Contains(guid));
+            }
+
+            templateCache.Add(templateId, matchesTemplate);
+            return matchesTemplate;
         }
-        
+
         /// <summary>
         /// Ensures that sitemaps directory exists
         /// </summary>
         protected static void EnsureSitemapsDirectoryExists()
         {
-            String dirPath = Sitecore.MainUtil.MapPath(DynamicSitemapConfiguration.SitemapConfigurationOutputFolder + "/");
+            String dirPath = MainUtil.MapPath(DynamicSitemapConfiguration.SitemapConfigurationOutputFolder + "/");
             if (!Directory.Exists(dirPath))
             {
                 Directory.CreateDirectory(dirPath);
             }
         }
-        
+
         /// <summary>
         /// Registers sitemaps to robots.txt
         /// </summary>
@@ -592,12 +632,12 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
                 if (DynamicSitemapConfiguration.UseSitemapsIndexFile)
                 {
-                    sitemapUrls.Add(SitemapIndex.Url);
+                    sitemapUrls.Add(this.SitemapIndex.Url);
                 }
 
                 else
                 {
-                    sitemapUrls.AddRange(SiteConfigurations.Select(x => x.SitemapUrl));
+                    sitemapUrls.AddRange(this.SiteConfigurations.Select(x => x.SitemapUrl));
                 }
 
                 foreach (var url in sitemapUrls)

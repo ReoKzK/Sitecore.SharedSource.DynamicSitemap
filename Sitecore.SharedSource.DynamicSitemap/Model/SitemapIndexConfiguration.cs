@@ -1,4 +1,5 @@
 ﻿using Sitecore.Links;
+using Sitecore.SharedSource.DynamicSitemap.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,11 @@ namespace Sitecore.SharedSource.DynamicSitemap.Model
         public string ServerHost { get; set; }
 
         /// <summary>
+        /// Forces generating https urls
+        /// </summary>
+        public bool ForceHttps { get; set; }
+
+        /// <summary>
         /// Sitemap index file name
         /// </summary>
         public String FileName { get; set; }
@@ -29,15 +35,16 @@ namespace Sitecore.SharedSource.DynamicSitemap.Model
         {
             get
             {
-                var url = ServerHost;
-                
-                url = !url.StartsWith("http://") ? "http://" + url : url;
+                var url = !string.IsNullOrEmpty(ServerHost) ? ServerHost : TargetHostName;
 
                 url = Sitecore.StringUtil.EnsurePostfix('/', url);
-                url += FileName;
+                url += FileName;    
+                url = DynamicSitemapHelper.EnsureHttpPrefix(url, ForceHttps);
 
                 return url;
             }
         }
+
+        public string TargetHostName { get; set; }
     }
 }

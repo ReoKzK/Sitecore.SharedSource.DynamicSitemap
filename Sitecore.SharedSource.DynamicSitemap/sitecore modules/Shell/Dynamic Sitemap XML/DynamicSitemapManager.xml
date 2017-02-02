@@ -1,13 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <control xmlns:def="Definition" xmlns="http://schemas.sitecore.net/Visual-Studio-Intellisense">
   <DynamicSitemapManager>
     <FormPage Height="300px">
-      <CodeBeside Type="Sitecore.SharedSource.DynamicSitemap.DynamicSitemapManagerForm, Sitecore.SharedSource.DynamicSitemap"/>
+      <CodeBeside
+        Type="Sitecore.SharedSource.DynamicSitemap.DynamicSitemapManagerForm, Sitecore.SharedSource.DynamicSitemap" />
 
       <Panel ID="MainPanel" Height="100%">
         <Border Background="white" Height="100%" Style="padding: 0px 10px 10px 10px;">
           <Border Height="10px">
-            
+
           </Border>
           <Border>
             <Literal Style="font-size: 20px; font-weight: bold;" Text="Sitemap refreshing page" />
@@ -16,10 +18,11 @@
             <Literal Text="&lt;hr /&gt;" />
           </Border>
           <Border>
-            <Button ID="RefreshButton" Header="Refresh Sitemap" ToolTip="Refresh sitemap file and register it to robots.txt" Style="width: 125px;" />
+            <Button ID="RefreshButton" Header="Refresh Sitemap"
+                    ToolTip="Refresh sitemap file and register it to robots.txt" Style="width: 125px;" />
           </Border>
           <Border Height="10px">
-            
+
           </Border>
           <Border>
             <Literal ID="Message" />
@@ -27,11 +30,10 @@
           <Border Height="20px" />
 
           <Border ID="Content">
-            
-            
-            
+
+
           </Border>
-          
+
         </Border>
       </Panel>
     </FormPage>

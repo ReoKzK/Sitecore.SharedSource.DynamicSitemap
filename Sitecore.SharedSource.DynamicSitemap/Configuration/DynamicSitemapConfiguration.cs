@@ -1,4 +1,5 @@
 ﻿using Sitecore.Xml;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,11 +78,11 @@ namespace Sitecore.SharedSource.DynamicSitemap.Configuration
             }
         }
 
-        public static bool IsProductionEnvironment
+        public static bool SubmitToSearchEngine
         {
             get
             {
-                string valueByName = GetValueByName("productionEnvironment");
+                string valueByName = GetValueByName("submitToSearchEngine");
                 return !string.IsNullOrEmpty(valueByName) && (valueByName.ToLower() == "true" || valueByName == "1");
             }
         }

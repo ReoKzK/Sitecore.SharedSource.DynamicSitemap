@@ -17,7 +17,10 @@ namespace Sitecore.SharedSource.DynamicSitemap.Extensions
 
         public override Encoding Encoding
         {
-            get { return encoding; }
+            get
+            {
+                return encoding;
+            }
         }
     }
 }
