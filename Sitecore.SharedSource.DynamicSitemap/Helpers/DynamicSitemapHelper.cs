@@ -57,12 +57,13 @@ namespace Sitecore.SharedSource.DynamicSitemap.Helpers
         /// <returns></returns>
         public static String EnsureHttpPrefix(String url, bool useHttps = false)
         {
-            if (!url.StartsWith("http") && !url.StartsWith("https"))
+            
+            if (!url.StartsWith("http://") && !url.StartsWith("https://"))
             {
-                url = (useHttps ? "https" : "http") + url;
+                url = (useHttps ? "https://" : "http://") + url;
             }
 
-            else if (url.StartsWith("http") && useHttps)
+            if (!url.StartsWith("https") && useHttps)
             {
                 url = url.ReplaceFirst("http", "https");
             }
