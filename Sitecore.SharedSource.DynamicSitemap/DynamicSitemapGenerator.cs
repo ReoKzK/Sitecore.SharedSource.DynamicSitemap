@@ -1,6 +1,7 @@
 ﻿using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
+using Sitecore.IO;
 using Sitecore.Links;
 using Sitecore.SharedSource.DynamicSitemap.Configuration;
 using Sitecore.SharedSource.DynamicSitemap.Constants;
@@ -164,9 +165,15 @@ namespace Sitecore.SharedSource.DynamicSitemap
             this.SitecoreConfiguration.MainSiteConfiguration = this.SiteConfigurations.FirstOrDefault(x => x.Site.Name.ToLower() == this.SitecoreConfiguration.MainSiteConfigurationItem.Name.ToLower());
 
             this.SitemapIndex = new SitemapIndexConfiguration();
-            this.SitemapIndex.ServerHost = this.SitecoreConfiguration.MainSiteConfiguration != null
-                ? this.SitecoreConfiguration.MainSiteConfiguration.ServerHost
-                : this.SiteConfigurations.FirstOrDefault().ServerHost;
+
+            var siteConfiguration = this.SitecoreConfiguration.MainSiteConfiguration ?? this.SiteConfigurations.FirstOrDefault();
+
+            if (siteConfiguration != null)
+            {
+                this.SitemapIndex.ServerHost = siteConfiguration.ServerHost;
+                this.SitemapIndex.ForceHttps = siteConfiguration.ForceHttps;
+                this.SitemapIndex.TargetHostName = siteConfiguration.TargetHost;
+            }
             this.SitemapIndex.FileName = this._sitemapIndexFileName;
         }
 
@@ -228,7 +235,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
             {
                 var sitemapContent = this.BuildSitemap(sitemapSiteConfiguration);
 
-                string path = MainUtil.MapPath(sitemapSiteConfiguration.SitemapFilePath);
+                string path = FileUtil.MapPath(null, sitemapSiteConfiguration.SitemapFilePath);
 
                 StreamWriter streamWriter = new StreamWriter(path, false);
                 streamWriter.Write(sitemapContent);

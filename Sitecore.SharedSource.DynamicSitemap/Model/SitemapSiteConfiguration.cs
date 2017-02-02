@@ -8,6 +8,7 @@ using Sitecore.SharedSource.DynamicSitemap.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sitecore.SharedSource.DynamicSitemap.Helpers;
 
 namespace Sitecore.SharedSource.DynamicSitemap.Model
 {
@@ -151,9 +152,20 @@ namespace Sitecore.SharedSource.DynamicSitemap.Model
         {
             get
             {
+                var url = TargetHost;
+                url += SitemapFilePath.Replace("//", "/");                
+
+                return url;
+            }
+        }
+
+        public string TargetHost
+        {
+            get
+            {
                 var url = Empty;
 
-                if (Site.HostName == Empty)
+                if (Site.TargetHostName == Empty)
                 {
                     Sitecore.Links.UrlOptions urlOptions = Sitecore.Links.UrlOptions.DefaultOptions;
                     urlOptions.LanguageEmbedding = LanguageEmbedding.Never;
@@ -165,17 +177,12 @@ namespace Sitecore.SharedSource.DynamicSitemap.Model
 
                     url = Sitecore.Links.LinkManager.GetItemUrl(startItem, urlOptions);
                 }
-
                 else
                 {
-                    url = !IsNullOrEmpty(ServerHost) ? ServerHost : Site.HostName;
+                    url = !IsNullOrEmpty(ServerHost) ? ServerHost : Site.TargetHostName + '/';
                 }
 
-                url = url.Replace("//", "/");
-                url = !url.StartsWith("http://") ? "http://" + url : url;
-
-                url += SitemapFilePath.Replace("//", "/");
-
+                url = DynamicSitemapHelper.EnsureHttpPrefix(url, ForceHttps);
                 return url;
             }
         }
