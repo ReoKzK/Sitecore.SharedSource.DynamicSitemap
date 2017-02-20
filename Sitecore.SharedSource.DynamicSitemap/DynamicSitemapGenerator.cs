@@ -172,7 +172,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
         }
 
         /// <summary>
-        /// Read global SC configuration
+        /// Read global configuration from Sitecore
         /// </summary>
         protected void ReadGlobalSitecoreConfiguration()
         {
@@ -280,7 +280,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
                 result = stringWriter.ToString();
 
-                Sitecore.Diagnostics.Log.Info(String.Format(Messages.SitemapBuidSuccess, sitemapSiteConfiguration), this);
+                Sitecore.Diagnostics.Log.Info(String.Format(Messages.SitemapBuildSuccess, sitemapSiteConfiguration), this);
             }
 
             return result;
@@ -545,7 +545,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
             if (!sitemapSiteConfiguration.ExcludedItems.Any(x => x == item.ID.ToString())
                 && sitemapSiteConfiguration.IncludedTemplates.Contains(item.TemplateID.ToString())
-                && !sitemapSiteConfiguration.ExcludedItemPaths.Any(x => item.Paths.FullPath.StartsWith(x.Paths.FullPath) && item.Paths.FullPath.Equals(x.Paths.FullPath))
+                && !sitemapSiteConfiguration.ExcludedItemPaths.Any(x => item.Paths.FullPath.ToLower().StartsWith(x.Paths.FullPath.ToLower()) || item.Paths.FullPath.ToLower().Equals(x.Paths.FullPath.ToLower()))
                 && (item.Paths.FullPath.StartsWith(sitemapSiteConfiguration.RootItem.Paths.FullPath)
                     || item.Paths.FullPath.Equals(sitemapSiteConfiguration.RootItem.Paths.FullPath)
                     || isDataSourceItem)) // - datasource items can be out of root item

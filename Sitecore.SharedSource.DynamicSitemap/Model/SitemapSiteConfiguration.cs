@@ -165,7 +165,7 @@ namespace Sitecore.SharedSource.DynamicSitemap.Model
                         : Site.HostName;
                 }
 
-                url = url.Replace("//", "/");
+                //url = url.Replace("//", "/");
                 url = !url.StartsWith("http://") 
                     ? "http://" + url 
                     : url;

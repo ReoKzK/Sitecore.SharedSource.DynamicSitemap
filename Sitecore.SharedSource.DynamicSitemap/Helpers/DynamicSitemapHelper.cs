@@ -60,8 +60,8 @@ namespace Sitecore.SharedSource.DynamicSitemap.Helpers
             {
                 url = (useHttps ? "https" : "http") + url;
             }
-
-            else if (url.StartsWith("http") && useHttps)
+            
+            else if (url.StartsWith("http") && !url.StartsWith("https") && useHttps)
             {
                 url = url.ReplaceFirst("http", "https");
             }
