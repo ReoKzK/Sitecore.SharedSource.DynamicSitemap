@@ -12,10 +12,12 @@ namespace Sitecore.SharedSource.DynamicSitemap.Constants
         public static readonly String ExecutionInterrupted = Label + "There are no sitemap configurations, execution interrupted.";
         public static readonly String NoConfigurations = Label + "There are no sitemap configurations.";
         public static readonly String NoGlobalScConfiguration = Label + "There is no global Sitecore configuration Item.";
+        public static readonly String NoProcessedLanguages = Label + "There are no processed languages selected in global configuration.";
 
         public static readonly String ExceptionWhileBuilding = Label + "Exception while building sitemap for {0} - {1}\n\n{2}";
 
         public static readonly String SitemapBuildSuccess = Label + "Sitemap generated - {0}";
+        public static readonly String SitemapDisabled = Label + "Sitemap generation is disabled";
 
         public static readonly String SitemapSubmitterCannotSubmit = Label + "Cannot submit sitemap to \"{0}\" - {1}";
         public static readonly String SitemapSubmitterExceptionWhileSubmit = Label + "Search engine submission \"{0}\" returns an error - {1} \n\n{2}";

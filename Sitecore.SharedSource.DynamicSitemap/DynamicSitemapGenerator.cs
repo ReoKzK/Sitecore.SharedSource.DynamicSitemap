@@ -109,6 +109,14 @@ namespace Sitecore.SharedSource.DynamicSitemap
         {
             ReadGlobalSitecoreConfiguration();
 
+            SiteConfigurations = new List<SitemapSiteConfiguration>();
+
+            if (SitecoreConfiguration.DisableSitemap)
+            {
+                Sitecore.Diagnostics.Log.Warn(Messages.SitemapDisabled, this);
+                return;
+            }
+
             Item[] configurationItems = Database.SelectItems(DynamicSitemapConfiguration.SitemapConfigurationItemPath + DynamicSitemapConfiguration.SitemapConfigurationSitesFolderName + "/*[@@templateid='" + TemplateIds.SiteConfigurationTemplateId + "']");
 
             if (configurationItems.Count() == 0)
@@ -116,9 +124,13 @@ namespace Sitecore.SharedSource.DynamicSitemap
                 Sitecore.Diagnostics.Log.Warn(Messages.NoConfigurations, this);
                 return;
             }
-
-            SiteConfigurations = new List<SitemapSiteConfiguration>();
-
+            
+            if (SitecoreConfiguration.ProcessedLanguages.Count() == 0)
+            {
+                Sitecore.Diagnostics.Log.Warn(Messages.NoProcessedLanguages, this);
+                return;
+            }
+            
             foreach (var configurationItem in configurationItems)
             {
                 var languageItems = configurationItem.Languages.Where(x => SitecoreConfiguration.ProcessedLanguages.Contains(x.Name)).ToList();
@@ -197,6 +209,8 @@ namespace Sitecore.SharedSource.DynamicSitemap
             {
                 SitecoreConfiguration.MainSiteConfigurationItem = mainSiteConfiguration;
             }
+
+            SitecoreConfiguration.DisableSitemap = globalConfigurationItem["Disable sitemap generation"] == "1";
 
             SitecoreConfiguration.SearchEngines = !String.IsNullOrEmpty(globalConfigurationItem["Search Engines"])
                 ? globalConfigurationItem["Search Engines"].Split('|').ToList()

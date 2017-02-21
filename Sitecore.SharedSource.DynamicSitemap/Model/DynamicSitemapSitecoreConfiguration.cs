@@ -13,6 +13,11 @@ namespace Sitecore.SharedSource.DynamicSitemap.Model
     public class DynamicSitemapSitecoreConfiguration
     {
         /// <summary>
+        /// If disable whole sitemap generation
+        /// </summary>
+        public bool DisableSitemap { get; set; }
+
+        /// <summary>
         /// Configuration that will be used as main
         /// </summary>
         public SitemapSiteConfiguration MainSiteConfiguration { get; set; }
