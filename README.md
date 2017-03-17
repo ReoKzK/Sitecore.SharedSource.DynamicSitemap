@@ -1,4 +1,4 @@
-# DynamicSitemap
+# Sitecore DynamicSitemap
 Sitecore sitemap module that tries to be as much flexible and configurable as possible.
 
 It has two main assumptions:
