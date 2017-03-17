@@ -1,4 +1,4 @@
-# Sitecore.SharedSource.DynamicSitemap
+# DynamicSitemap
 Sitecore sitemap module that tries to be as much flexible and configurable as possible.
 
 It has two main assumptions:
@@ -11,31 +11,30 @@ It has two main assumptions:
 	
 	Code functionality should be extensible and overridable. It should be easy to extend or override functionality, without decompiling and copy-pasting a lot of code.
 
--
 
 Module was based on the original Sitemap XML module
 	
-###New features:
+### New features:
 - Configurations for sites controlled from Content Editor
-- Defining <changefreq> and <priority> tags for templates and specified items
+- Defining < changefreq > and < priority > tags for templates and specified items
 - Language fallback for configuration items
 - Overridable method ProcessItems() for specifing own low-level logic
 - Generating sitemap index file
 	
-###Original Sitemap XML features
+### Original Sitemap XML features
 - Multisite and multilanguage support
 - Automatically updated robots.txt file
 - Physical XML sitemaps files generation
 - Automatic sitemap submit on publish
 	
 	
-###Installation:
+### Installation:
 - Install zip package using Sitecore Package Installer
 	
-###Configuration:
+### Configuration:
 - Dynamic Sitemap XML provides Sitecore.SharedSource.DynamicSitemap.config configuration file installed in /App_Config/Include directory.
 
-####Setting that can be specified there:
+#### Setting that can be specified there:
 - sitemapConfigurationOutputFolder - folder where will be generated sitemap xml files
 - refreshRobotsFile (true or false) - indicates that robots.txt file will be updated with references to sitemap xml files
 - xmlnsTpl - sitemap module schema used for the XML sitemap
