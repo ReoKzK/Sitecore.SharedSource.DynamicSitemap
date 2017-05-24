@@ -1,9 +1,4 @@
 ﻿using Sitecore.Xml;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace Sitecore.SharedSource.DynamicSitemap.Configuration
@@ -11,7 +6,7 @@ namespace Sitecore.SharedSource.DynamicSitemap.Configuration
     /// <summary>
     /// Dynamic Sitemap Module Configuration
     /// </summary>
-    internal class DynamicSitemapConfiguration
+    public class DynamicSitemapConfiguration
     {
         public static string XmlnsTpl
         {

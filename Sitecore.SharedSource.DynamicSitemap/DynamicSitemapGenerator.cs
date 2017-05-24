@@ -105,7 +105,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// <summary>
         /// Reads configurations from Sitecore
         /// </summary>
-        public void ReadConfigurations()
+        public virtual void ReadConfigurations()
         {
             ReadGlobalSitecoreConfiguration();
 
@@ -186,7 +186,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// <summary>
         /// Read global configuration from Sitecore
         /// </summary>
-        protected void ReadGlobalSitecoreConfiguration()
+        protected virtual void ReadGlobalSitecoreConfiguration()
         {
             Item globalConfigurationItem = Database.GetItem(DynamicSitemapConfiguration.SitemapConfigurationItemPath + "/Configuration");
 
@@ -237,7 +237,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// <summary>
         /// Generate sitemaps into the file system
         /// </summary>
-        protected void GenerateSitemaps()
+        protected virtual void GenerateSitemaps()
         {
             foreach (var sitemapSiteConfiguration in SiteConfigurations)
             {
@@ -256,7 +256,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// </summary>
         /// <param name="sitemapSiteConfiguration">Sitemap site configuration</param>
         /// <returns>Sitemap content</returns>
-        public String BuildSitemap(SitemapSiteConfiguration sitemapSiteConfiguration)
+        public virtual String BuildSitemap(SitemapSiteConfiguration sitemapSiteConfiguration)
         {
             var result = String.Empty;
 
@@ -303,7 +303,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// <summary>
         /// Generates sitemaps index
         /// </summary>
-        protected void GenerateSitemapsIndex()
+        protected virtual void GenerateSitemapsIndex()
         {
             if (!DynamicSitemapConfiguration.UseSitemapsIndexFile)
             {
@@ -366,7 +366,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// <param name="rootPath"></param>
         /// <param name="language"></param>
         /// <returns></returns>
-        protected List<Item> GetItems(String rootPath, Language language)
+        protected virtual List<Item> GetItems(String rootPath, Language language)
         {
             var items = new List<Item>();
 
@@ -391,7 +391,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// <param name="sitemapSiteConfiguration">Current sitemap configuration</param>
         /// <param name="options">Url Options</param>
         /// <param name="xml">Xml Text Writer object</param>
-        public void ProcessItems(List<Item> items, SitemapSiteConfiguration sitemapSiteConfiguration, UrlOptions options, XmlTextWriter xml)
+        public virtual void ProcessItems(List<Item> items, SitemapSiteConfiguration sitemapSiteConfiguration, UrlOptions options, XmlTextWriter xml)
         {
             foreach (var item in items)
             {
@@ -434,7 +434,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// <param name="wildcardItem">Wildcard Item</param>
         /// <param name="sitemapSiteConfiguration">Sitemap site configuration</param>
         /// <param name="xml">XmlTextWriter object</param>
-        protected void PrepareDynamicItems(Item wildcardItem, SitemapSiteConfiguration sitemapSiteConfiguration, XmlTextWriter xml)
+        protected virtual void PrepareDynamicItems(Item wildcardItem, SitemapSiteConfiguration sitemapSiteConfiguration, XmlTextWriter xml)
         {
             var dynamicRoute = sitemapSiteConfiguration.DynamicRoutes.SingleOrDefault(x => x["Dynamic Item"] == wildcardItem.ID.ToString());
 
@@ -478,7 +478,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// Gets default UrlOptions
         /// </summary>
         /// <returns></returns>
-        protected UrlOptions GetUrlOptions()
+        protected virtual UrlOptions GetUrlOptions()
         {
             var urlOptions = LinkManager.GetDefaultUrlOptions();
             urlOptions.AlwaysIncludeServerUrl = true;
@@ -494,7 +494,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// <param name="item"></param>
         /// <param name="sitemapSiteConfiguration"></param>
         /// <param name="xml"></param>
-        protected void GenerateUrlElement(String url, Item item, SitemapSiteConfiguration sitemapSiteConfiguration, XmlTextWriter xml)
+        protected virtual void GenerateUrlElement(String url, Item item, SitemapSiteConfiguration sitemapSiteConfiguration, XmlTextWriter xml)
         {
             sitemapSiteConfiguration.ItemsCount++;
 
@@ -523,7 +523,13 @@ namespace Sitecore.SharedSource.DynamicSitemap
             xml.WriteEndElement();
         }
 
-        protected void GenerateUrlElement(UrlElement urlElement, SitemapSiteConfiguration sitemapSiteConfiguration, XmlTextWriter xml)
+        /// <summary>
+        /// Generates url element
+        /// </summary>
+        /// <param name="urlElement"></param>
+        /// <param name="sitemapSiteConfiguration"></param>
+        /// <param name="xml"></param>
+        protected virtual void GenerateUrlElement(UrlElement urlElement, SitemapSiteConfiguration sitemapSiteConfiguration, XmlTextWriter xml)
         {
             sitemapSiteConfiguration.ItemsCount++;
 
@@ -553,7 +559,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// <param name="item">Item</param>
         /// <param name="isDataSourceItem">Is item used only in wildcard</param>
         /// <returns>true if included</returns>
-        protected bool IsIncluded(Item item, SitemapSiteConfiguration sitemapSiteConfiguration, bool isDataSourceItem = false)
+        protected virtual bool IsIncluded(Item item, SitemapSiteConfiguration sitemapSiteConfiguration, bool isDataSourceItem = false)
         {
             var result = false;
 
@@ -585,7 +591,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// <summary>
         /// Registers sitemaps to robots.txt
         /// </summary>
-        public void RegisterSitemapToRobotsFile()
+        public virtual void RegisterSitemapToRobotsFile()
         {
             if (DynamicSitemapConfiguration.RefreshRobotsFile)
             {
