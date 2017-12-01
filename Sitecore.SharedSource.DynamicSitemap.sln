@@ -3,11 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap", "Sitecore.SharedSource.DynamicSitemap\Sitecore.SharedSource.DynamicSitemap.csproj", "{57A4EFDD-889F-47CF-A47B-B65F813CB234}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Feature", "Feature", "{CEAE48BB-2FCC-4C1F-B034-3E072DBD925E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap.Tests", "Sitecore.SharedSource.DynamicSitemap.Tests\Sitecore.SharedSource.DynamicSitemap.Tests.csproj", "{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Foundation", "Foundation", "{4758D462-A887-4887-BBF3-AD6CA0D85CAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap.ItemsProcessor", "Sitecore.SharedSource.DynamicSitemap.ItemsProcessor\Sitecore.SharedSource.DynamicSitemap.ItemsProcessor.csproj", "{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project", "Project", "{12A093A7-7A32-44BF-A2C9-688DB681C324}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{C3F1DB21-8319-4496-B142-9BF426AD52F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DynamicSitemap", "DynamicSitemap", "{895CD4DD-8B8F-4D81-BC09-27FF14C72FCD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DynamicSitemap.ItemsProcessor", "DynamicSitemap.ItemsProcessor", "{3058530C-4093-44C2-A4DC-FFDFA2D71593}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap", "src\Foundation\DynamicSitemap\src\Sitecore.SharedSource.DynamicSitemap.csproj", "{57A4EFDD-889F-47CF-A47B-B65F813CB234}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap.ItemsProcessor", "src\Feature\DynamicSitemap.ItemsProcessor\src\Sitecore.SharedSource.DynamicSitemap.ItemsProcessor.csproj", "{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap.Tests", "src\Foundation\DynamicSitemap\tests\Sitecore.SharedSource.DynamicSitemap.Tests.csproj", "{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,16 +31,23 @@ Global
 		{57A4EFDD-889F-47CF-A47B-B65F813CB234}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57A4EFDD-889F-47CF-A47B-B65F813CB234}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57A4EFDD-889F-47CF-A47B-B65F813CB234}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{895CD4DD-8B8F-4D81-BC09-27FF14C72FCD} = {4758D462-A887-4887-BBF3-AD6CA0D85CAA}
+		{3058530C-4093-44C2-A4DC-FFDFA2D71593} = {CEAE48BB-2FCC-4C1F-B034-3E072DBD925E}
+		{57A4EFDD-889F-47CF-A47B-B65F813CB234} = {895CD4DD-8B8F-4D81-BC09-27FF14C72FCD}
+		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577} = {3058530C-4093-44C2-A4DC-FFDFA2D71593}
+		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2} = {895CD4DD-8B8F-4D81-BC09-27FF14C72FCD}
 	EndGlobalSection
 EndGlobal

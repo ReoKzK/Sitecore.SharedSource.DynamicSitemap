@@ -3,8 +3,12 @@ Sitecore.SharedSource.DynamicSitemap/obj/
 Sitecore.SharedSource.DynamicSitemap/bin/
 *.user
 packages/
+bin/
+obj/
+TestResults/
 Sitecore.SharedSource.DynamicSitemap.Tests/obj/
 Sitecore.SharedSource.DynamicSitemap.Tests/bin/
 Libraries/
 Sitecore.SharedSource.DynamicSitemap.ItemsProcessor/obj/
 Sitecore.SharedSource.DynamicSitemap.ItemsProcessor/bin/
+*.dll
