@@ -37,10 +37,9 @@ namespace Sitecore.SharedSource.DynamicSitemap.Services
                 //options.Site = sitemapSiteConfiguration.Site;
                 //options.Language = sitemapSiteConfiguration.Language;
 
-                //List<Item> items = _itemsRepository.GetItems(sitemapSiteConfiguration.Site.RootPath, sitemapSiteConfiguration.Language);
                 foreach (var urlElement in elements)
                 {
-                    WriteUrlElement(urlElement, sitemapSiteConfiguration, xml);
+                    WriteUrlElement(urlElement, xml);
                 }
             }
 
@@ -67,12 +66,9 @@ namespace Sitecore.SharedSource.DynamicSitemap.Services
         /// Generates url element
         /// </summary>
         /// <param name="urlElement"></param>
-        /// <param name="sitemapSiteConfiguration"></param>
         /// <param name="xml"></param>
-        protected virtual void WriteUrlElement(UrlElement urlElement, SitemapSiteConfiguration sitemapSiteConfiguration, XmlTextWriter xml)
+        protected virtual void WriteUrlElement(UrlElement urlElement, XmlTextWriter xml)
         {
-            sitemapSiteConfiguration.ItemsCount++;
-
             xml.WriteStartElement("url");
             xml.WriteElementString("loc", urlElement.Location);
 
@@ -135,42 +131,6 @@ namespace Sitecore.SharedSource.DynamicSitemap.Services
         //            WriteUrlElement(urlItem, sitemapSiteConfiguration, xml);
         //        }
         //    }
-        //}
-
-        /// <summary>
-        /// Generates url element
-        /// </summary>
-        /// <param name="url"></param>
-        /// <param name="item"></param>
-        /// <param name="sitemapSiteConfiguration"></param>
-        /// <param name="xml"></param>
-        //protected virtual void WriteUrlElement(String url, Item item, SitemapSiteConfiguration sitemapSiteConfiguration, XmlTextWriter xml)
-        //{
-        //    sitemapSiteConfiguration.ItemsCount++;
-
-        //    xml.WriteStartElement("url");
-        //    xml.WriteElementString("loc", url);
-
-        //    if (item != null)
-        //    {
-        //        var lastModified = item.Statistics.Updated.ToString("yyyy-MM-ddThh:mm:sszzz");
-
-        //        xml.WriteElementString("lastmod", lastModified);
-
-        //        String changeFrequency = sitemapSiteConfiguration.GetChangeFrequency(item);
-        //        if (changeFrequency != String.Empty)
-        //        {
-        //            xml.WriteElementString("changefreq", changeFrequency);
-        //        }
-
-        //        String priority = sitemapSiteConfiguration.GetPriority(item);
-        //        if (priority != String.Empty)
-        //        {
-        //            xml.WriteElementString("priority", priority);
-        //        }
-        //    }
-
-        //    xml.WriteEndElement();
         //}
     }
 }

@@ -31,6 +31,8 @@ namespace Sitecore.SharedSource.DynamicSitemap.Services
 
                     if (IsIncluded(item, sitemapSiteConfiguration))
                     {
+                        sitemapSiteConfiguration.ItemsCount++;
+
                         var url = LinkManager.GetItemUrl(item, options);
                         url = DynamicSitemapHelper.EnsureHttpPrefix(url, sitemapSiteConfiguration.ForceHttps);
 
@@ -56,11 +58,6 @@ namespace Sitecore.SharedSource.DynamicSitemap.Services
                 var urlItems = sitemapSiteConfiguration.ItemsProcessor.ProcessItems(sitemapSiteConfiguration);
 
                 urlItems.AddRange(urlItems);
-
-                //foreach (var urlItem in urlItems)
-                //{
-                //    GenerateUrlElement(urlItem, sitemapSiteConfiguration, xml);
-                //}
             }
 
             return urlElements;
