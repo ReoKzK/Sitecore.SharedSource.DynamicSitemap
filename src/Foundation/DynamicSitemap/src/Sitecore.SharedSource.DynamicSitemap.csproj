@@ -63,6 +63,12 @@
     <Compile Include="Modules\ItemsProcessorLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\SitemapSiteConfiguration.cs" />
+    <Compile Include="Repositories\IItemsRepository.cs" />
+    <Compile Include="Repositories\ItemsRepository.cs" />
+    <Compile Include="Services\IItemsProcessingService.cs" />
+    <Compile Include="Services\ISitemapBuildingService.cs" />
+    <Compile Include="Services\ItemsProcessingService.cs" />
+    <Compile Include="Services\SitemapBuildingService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App_Config\Include\Sitecore.SharedSource.DynamicSitemap.config">

@@ -1,9 +1,6 @@
 ﻿using Sitecore.SharedSource.DynamicSitemap.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Sitecore.SharedSource.DynamicSitemap;
 using Sitecore.SharedSource.DynamicSitemap.Model;
 
 namespace Sitecore.SharedSource.DynamicSitemap.ItemsProcessor
