@@ -4,7 +4,6 @@ using Sitecore.Links;
 using Sitecore.SharedSource.DynamicSitemap.Configuration;
 using Sitecore.SharedSource.DynamicSitemap.Constants;
 using Sitecore.SharedSource.DynamicSitemap.Extensions;
-using Sitecore.SharedSource.DynamicSitemap.Logic;
 using Sitecore.SharedSource.DynamicSitemap.Model;
 using Sitecore.SharedSource.DynamicSitemap.Modules;
 using System;
@@ -74,23 +73,40 @@ namespace Sitecore.SharedSource.DynamicSitemap
         /// </summary>
         protected IItemsProcessingService _itemsProcessingService;
 
+        protected IRobotsService _robotsService;
+
         /// <summary>
         /// Dynamic Sitemap Generator
         /// </summary>
         public DynamicSitemapGenerator()
         {
             SiteConfigurations = new List<SitemapSiteConfiguration>();
-            _itemsRepository = new ItemsRepository(this.Database);
+
+            if (DynamicSitemapConfiguration.UseSitecoreIndex)
+            {
+                _itemsRepository = new ItemsIndexRepository();
+            }
+
+            else
+            {
+                _itemsRepository = new ItemsRepository(this.Database);
+            }
+
             _sitemapBuildingService = new SitemapBuildingService();
             _itemsProcessingService = new ItemsProcessingService();
+            _robotsService = new RobotsService();
         }
 
-        public DynamicSitemapGenerator(IItemsRepository itemsRepository, ISitemapBuildingService sitemapBuildingService, IItemsProcessingService itemsProcessingService)
+        public DynamicSitemapGenerator(IItemsRepository itemsRepository, 
+            ISitemapBuildingService sitemapBuildingService, 
+            IItemsProcessingService itemsProcessingService,
+            IRobotsService robotsService)
         {
             SiteConfigurations = new List<SitemapSiteConfiguration>();
             _itemsRepository = itemsRepository;
             _sitemapBuildingService = sitemapBuildingService;
             _itemsProcessingService = itemsProcessingService;
+            _robotsService = robotsService;
         }
 
         /// <summary>
@@ -118,11 +134,23 @@ namespace Sitecore.SharedSource.DynamicSitemap
             GenerateSitemaps();
             GenerateSitemapsIndex();
 
-            RegisterSitemapToRobotsFile();
+            List<String> sitemapUrls = new List<String>();
+
+            if (DynamicSitemapConfiguration.UseSitemapsIndexFile)
+            {
+                sitemapUrls.Add(SitemapIndex.Url);
+            }
+
+            else
+            {
+                sitemapUrls.AddRange(SiteConfigurations.Select(x => x.SitemapUrl));
+            }
+
+            _robotsService.RegisterSitemapToRobotsFile(sitemapUrls);
 
             if (DynamicSitemapConfiguration.IsProductionEnvironment)
             {
-                var submitter = new SitemapSubmitter(SitecoreConfiguration, SiteConfigurations, Database);
+                var submitter = new SitemapSubmitterService(SitecoreConfiguration, SiteConfigurations, Database);
                 submitter.SubmitSitemapsToSearchEngines();
             }
         }
@@ -201,11 +229,13 @@ namespace Sitecore.SharedSource.DynamicSitemap
 
             SitecoreConfiguration.MainSiteConfiguration = SiteConfigurations.FirstOrDefault(x => x.Site.Name.ToLower() == SitecoreConfiguration.MainSiteConfigurationItem.Name.ToLower());
 
-            SitemapIndex = new SitemapIndexConfiguration();
-            SitemapIndex.ServerHost = SitecoreConfiguration.MainSiteConfiguration != null
-                ? SitecoreConfiguration.MainSiteConfiguration.ServerHost
-                : SiteConfigurations.FirstOrDefault().ServerHost;
-            SitemapIndex.FileName = _sitemapIndexFileName;
+            SitemapIndex = new SitemapIndexConfiguration
+            {
+                ServerHost = SitecoreConfiguration.MainSiteConfiguration != null
+                    ? SitecoreConfiguration.MainSiteConfiguration.ServerHost
+                    : SiteConfigurations.FirstOrDefault().ServerHost,
+                FileName = _sitemapIndexFileName
+            };
         }
 
         /// <summary>
@@ -409,58 +439,6 @@ namespace Sitecore.SharedSource.DynamicSitemap
             if (!Directory.Exists(dirPath))
             {
                 Directory.CreateDirectory(dirPath);
-            }
-        }
-        
-        /// <summary>
-        /// Registers sitemaps to robots.txt
-        /// </summary>
-        public virtual void RegisterSitemapToRobotsFile()
-        {
-            if (DynamicSitemapConfiguration.RefreshRobotsFile)
-            {
-                String robotsPath = MainUtil.MapPath("/" + "robots.txt");
-
-                StringBuilder stringBuilder = new StringBuilder(String.Empty);
-
-                if (File.Exists(robotsPath))
-                {
-                    StreamReader streamReader = new StreamReader(robotsPath);
-                    stringBuilder.Append(streamReader.ReadToEnd());
-                    streamReader.Close();
-                }
-
-                StreamWriter streamWriter = new StreamWriter(robotsPath, false);
-
-                List<String> sitemapUrls = new List<String>();
-
-                if (DynamicSitemapConfiguration.UseSitemapsIndexFile)
-                {
-                    sitemapUrls.Add(SitemapIndex.Url);
-                }
-
-                else
-                {
-                    sitemapUrls.AddRange(SiteConfigurations.Select(x => x.SitemapUrl));
-                }
-
-                foreach (var url in sitemapUrls)
-                {
-                    String value = "Sitemap: " + url;
-
-                    if (!stringBuilder.ToString().Contains(value))
-                    {
-                        if (!stringBuilder.ToString().EndsWith(Environment.NewLine) && stringBuilder.ToString().Trim() != String.Empty)
-                        {
-                            stringBuilder.AppendLine();
-                        }
-
-                        stringBuilder.AppendLine(value);
-                    }
-                }
-
-                streamWriter.Write(stringBuilder.ToString());
-                streamWriter.Close();
             }
         }
     }

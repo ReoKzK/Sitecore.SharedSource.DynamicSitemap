@@ -63,7 +63,9 @@
     <Compile Include="Extensions\StringWriterWithEncoding.cs" />
     <Compile Include="Helpers\DynamicSitemapHelper.cs" />
     <Compile Include="Interfaces\IItemsProcessor.cs" />
-    <Compile Include="Logic\SitemapSubmitter.cs" />
+    <Compile Include="Services\IRobotsService.cs" />
+    <Compile Include="Services\RobotsService.cs" />
+    <Compile Include="Services\SitemapSubmitterService.cs" />
     <Compile Include="Model\DynamicSitemapSitecoreConfiguration.cs" />
     <Compile Include="Model\SitemapIndexConfiguration.cs" />
     <Compile Include="Model\SubmissionUrlsConfig.cs" />

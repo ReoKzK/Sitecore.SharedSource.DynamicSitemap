@@ -72,6 +72,14 @@ namespace Sitecore.SharedSource.DynamicSitemap.Configuration
             }
         }
 
+        public static string SitecoreIndex
+        {
+            get
+            {
+                return GetValueByName("sitecoreIndex");
+            }
+        }
+
         public static bool IsProductionEnvironment
         {
             get
@@ -95,6 +103,17 @@ namespace Sitecore.SharedSource.DynamicSitemap.Configuration
             get
             {
                 string valueByName = GetValueByName("useSitemapsIndexFile");
+                return !string.IsNullOrEmpty(valueByName) && (valueByName.ToLower() == "true" || valueByName == "1");
+            }
+        }
+
+
+
+        public static bool UseSitecoreIndex
+        {
+            get
+            {
+                string valueByName = GetValueByName("useSitecoreIndex");
                 return !string.IsNullOrEmpty(valueByName) && (valueByName.ToLower() == "true" || valueByName == "1");
             }
         }

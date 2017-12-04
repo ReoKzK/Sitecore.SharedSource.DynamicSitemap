@@ -4,6 +4,7 @@ using Sitecore.ContentSearch;
 using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
+using Sitecore.SharedSource.DynamicSitemap.Configuration;
 
 namespace Sitecore.SharedSource.DynamicSitemap.Repositories
 {
@@ -13,7 +14,7 @@ namespace Sitecore.SharedSource.DynamicSitemap.Repositories
         {
             List<SearchResultItem> searchResultItems;
 
-            var index = ContentSearchManager.GetIndex("sitecore_web_index");
+            var index = ContentSearchManager.GetIndex(DynamicSitemapConfiguration.SitecoreIndex);
 
             using (var context = index.CreateSearchContext())
             {

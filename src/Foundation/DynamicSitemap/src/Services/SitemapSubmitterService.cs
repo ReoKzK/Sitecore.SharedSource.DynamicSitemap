@@ -1,21 +1,19 @@
-﻿using Sitecore.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Web;
+using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.SharedSource.DynamicSitemap.Configuration;
 using Sitecore.SharedSource.DynamicSitemap.Constants;
 using Sitecore.SharedSource.DynamicSitemap.Model;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Text;
-using System.Web;
 
-namespace Sitecore.SharedSource.DynamicSitemap.Logic
+namespace Sitecore.SharedSource.DynamicSitemap.Services
 {
     /// <summary>
     /// Sitemap submitter
     /// </summary>
-    public class SitemapSubmitter
+    public class SitemapSubmitterService
     {
         /// <summary>
         /// Configuration in Sitecore
@@ -39,7 +37,7 @@ namespace Sitecore.SharedSource.DynamicSitemap.Logic
 
         protected List<SubmissionUrlsConfig> SubmissionUrlsConfig { get; set; }
 
-        public SitemapSubmitter(DynamicSitemapSitecoreConfiguration config, List<SitemapSiteConfiguration> siteConfigurations, Database database)
+        public SitemapSubmitterService(DynamicSitemapSitecoreConfiguration config, List<SitemapSiteConfiguration> siteConfigurations, Database database)
         {
             SitecoreConfiguration = config;
             SiteConfigurations = siteConfigurations;
@@ -121,26 +119,26 @@ namespace Sitecore.SharedSource.DynamicSitemap.Logic
         /// <param name="sitemapUrl"></param>
         protected void SubmitEngine(string engine, string sitemapUrl)
         {
-            if (!sitemapUrl.Contains("://localhost"))
+            if (sitemapUrl.Contains("://localhost"))
+                return;
+
+            String text = engine + HttpUtility.HtmlEncode(sitemapUrl);
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(text);
+
+            try
             {
-                String text = engine + HttpUtility.HtmlEncode(sitemapUrl);
-                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(text);
+                WebResponse response = httpWebRequest.GetResponse();
+                HttpWebResponse httpWebResponse = (HttpWebResponse)response;
 
-                try
+                if (httpWebResponse.StatusCode != HttpStatusCode.OK)
                 {
-                    WebResponse response = httpWebRequest.GetResponse();
-                    HttpWebResponse httpWebResponse = (HttpWebResponse)response;
-
-                    if (httpWebResponse.StatusCode != HttpStatusCode.OK)
-                    {
-                        Diagnostics.Log.Error(String.Format(Messages.SitemapSubmitterCannotSubmit, engine, httpWebResponse.StatusDescription), this);
-                    }
+                    Diagnostics.Log.Error(String.Format(Messages.SitemapSubmitterCannotSubmit, engine, httpWebResponse.StatusDescription), this);
                 }
+            }
 
-                catch (Exception exc)
-                {
-                    Diagnostics.Log.Warn(String.Format(Messages.SitemapSubmitterExceptionWhileSubmit, text, exc.Message, exc.StackTrace), this);
-                }
+            catch (Exception exc)
+            {
+                Diagnostics.Log.Warn(String.Format(Messages.SitemapSubmitterExceptionWhileSubmit, text, exc.Message, exc.StackTrace), this);
             }
         }
     }
