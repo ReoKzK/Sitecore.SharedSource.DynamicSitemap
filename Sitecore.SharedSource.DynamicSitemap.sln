@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.Dynam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap.Tests", "src\Foundation\DynamicSitemap\tests\Sitecore.SharedSource.DynamicSitemap.Tests.csproj", "{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Website", "Website", "{F9689333-B446-477F-B6CC-1933167B72BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap.Project.Website", "src\Project\Website\code\Sitecore.SharedSource.DynamicSitemap.Project.Website.csproj", "{0BC3096A-1D6F-416A-B1D0-EA31F5617BA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,10 @@ Global
 		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BC3096A-1D6F-416A-B1D0-EA31F5617BA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BC3096A-1D6F-416A-B1D0-EA31F5617BA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BC3096A-1D6F-416A-B1D0-EA31F5617BA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BC3096A-1D6F-416A-B1D0-EA31F5617BA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,5 +57,7 @@ Global
 		{57A4EFDD-889F-47CF-A47B-B65F813CB234} = {895CD4DD-8B8F-4D81-BC09-27FF14C72FCD}
 		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577} = {3058530C-4093-44C2-A4DC-FFDFA2D71593}
 		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2} = {895CD4DD-8B8F-4D81-BC09-27FF14C72FCD}
+		{F9689333-B446-477F-B6CC-1933167B72BE} = {12A093A7-7A32-44BF-A2C9-688DB681C324}
+		{0BC3096A-1D6F-416A-B1D0-EA31F5617BA8} = {F9689333-B446-477F-B6CC-1933167B72BE}
 	EndGlobalSection
 EndGlobal
