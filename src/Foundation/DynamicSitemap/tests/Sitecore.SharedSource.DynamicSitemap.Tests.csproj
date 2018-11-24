@@ -71,7 +71,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\Sitecore.SharedSource.DynamicSitemap.csproj">
+    <ProjectReference Include="..\code\Sitecore.SharedSource.DynamicSitemap.csproj">
       <Project>{57a4efdd-889f-47cf-a47b-b65f813cb234}</Project>
       <Name>Sitecore.SharedSource.DynamicSitemap</Name>
     </ProjectReference>

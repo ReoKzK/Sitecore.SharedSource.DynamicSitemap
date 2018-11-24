@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Feature", "Feature", "{CEAE48BB-2FCC-4C1F-B034-3E072DBD925E}"
 EndProject
@@ -15,15 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DynamicSitemap", "DynamicSi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DynamicSitemap.ItemsProcessor", "DynamicSitemap.ItemsProcessor", "{3058530C-4093-44C2-A4DC-FFDFA2D71593}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap", "src\Foundation\DynamicSitemap\src\Sitecore.SharedSource.DynamicSitemap.csproj", "{57A4EFDD-889F-47CF-A47B-B65F813CB234}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap.ItemsProcessor", "src\Feature\DynamicSitemap.ItemsProcessor\src\Sitecore.SharedSource.DynamicSitemap.ItemsProcessor.csproj", "{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap.Tests", "src\Foundation\DynamicSitemap\tests\Sitecore.SharedSource.DynamicSitemap.Tests.csproj", "{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Website", "Website", "{F9689333-B446-477F-B6CC-1933167B72BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap.Project.Website", "src\Project\Website\code\Sitecore.SharedSource.DynamicSitemap.Project.Website.csproj", "{0BC3096A-1D6F-416A-B1D0-EA31F5617BA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap", "src\Foundation\DynamicSitemap\code\Sitecore.SharedSource.DynamicSitemap.csproj", "{57A4EFDD-889F-47CF-A47B-B65F813CB234}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap.Tests", "src\Foundation\DynamicSitemap\tests\Sitecore.SharedSource.DynamicSitemap.Tests.csproj", "{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sitecore.SharedSource.DynamicSitemap.ItemsProcessor", "src\Feature\DynamicSitemap.ItemsProcessor\code\Sitecore.SharedSource.DynamicSitemap.ItemsProcessor.csproj", "{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,22 +31,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{57A4EFDD-889F-47CF-A47B-B65F813CB234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57A4EFDD-889F-47CF-A47B-B65F813CB234}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57A4EFDD-889F-47CF-A47B-B65F813CB234}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57A4EFDD-889F-47CF-A47B-B65F813CB234}.Release|Any CPU.Build.0 = Release|Any CPU
-		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0BC3096A-1D6F-416A-B1D0-EA31F5617BA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0BC3096A-1D6F-416A-B1D0-EA31F5617BA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BC3096A-1D6F-416A-B1D0-EA31F5617BA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BC3096A-1D6F-416A-B1D0-EA31F5617BA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57A4EFDD-889F-47CF-A47B-B65F813CB234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57A4EFDD-889F-47CF-A47B-B65F813CB234}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57A4EFDD-889F-47CF-A47B-B65F813CB234}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57A4EFDD-889F-47CF-A47B-B65F813CB234}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,10 +54,13 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{895CD4DD-8B8F-4D81-BC09-27FF14C72FCD} = {4758D462-A887-4887-BBF3-AD6CA0D85CAA}
 		{3058530C-4093-44C2-A4DC-FFDFA2D71593} = {CEAE48BB-2FCC-4C1F-B034-3E072DBD925E}
-		{57A4EFDD-889F-47CF-A47B-B65F813CB234} = {895CD4DD-8B8F-4D81-BC09-27FF14C72FCD}
-		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577} = {3058530C-4093-44C2-A4DC-FFDFA2D71593}
-		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2} = {895CD4DD-8B8F-4D81-BC09-27FF14C72FCD}
 		{F9689333-B446-477F-B6CC-1933167B72BE} = {12A093A7-7A32-44BF-A2C9-688DB681C324}
 		{0BC3096A-1D6F-416A-B1D0-EA31F5617BA8} = {F9689333-B446-477F-B6CC-1933167B72BE}
+		{57A4EFDD-889F-47CF-A47B-B65F813CB234} = {895CD4DD-8B8F-4D81-BC09-27FF14C72FCD}
+		{A6E1447C-5BCF-4133-8C73-9AA2D06E37F2} = {895CD4DD-8B8F-4D81-BC09-27FF14C72FCD}
+		{21B0AB34-57D2-41ED-8E6D-C22DD14B0577} = {3058530C-4093-44C2-A4DC-FFDFA2D71593}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDBB5B14-8BBD-4ED2-ADE8-B54BEDECED75}
 	EndGlobalSection
 EndGlobal
