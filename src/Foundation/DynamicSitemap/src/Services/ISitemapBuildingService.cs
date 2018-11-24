@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Sitecore.SharedSource.DynamicSitemap.Model;
+﻿using Sitecore.SharedSource.DynamicSitemap.Model;
+using System.Collections.Generic;
 
 namespace Sitecore.SharedSource.DynamicSitemap.Services
 {

@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Sitecore.ContentSearch;
+﻿using Sitecore.ContentSearch;
 using Sitecore.ContentSearch.SearchTypes;
 using Sitecore.Data.Items;
 using Sitecore.Globalization;
 using Sitecore.SharedSource.DynamicSitemap.Configuration;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Sitecore.SharedSource.DynamicSitemap.Repositories
 {

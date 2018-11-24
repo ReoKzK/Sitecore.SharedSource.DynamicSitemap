@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Sitecore.Data.Items;
+﻿using Sitecore.Data.Items;
 using Sitecore.Globalization;
+using System.Collections.Generic;
 
 namespace Sitecore.SharedSource.DynamicSitemap.Repositories
 {

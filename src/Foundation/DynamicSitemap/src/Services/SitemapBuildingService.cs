@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using Sitecore.SharedSource.DynamicSitemap.Configuration;
+﻿using Sitecore.SharedSource.DynamicSitemap.Configuration;
 using Sitecore.SharedSource.DynamicSitemap.Constants;
 using Sitecore.SharedSource.DynamicSitemap.Extensions;
 using Sitecore.SharedSource.DynamicSitemap.Model;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Xml;
 
 namespace Sitecore.SharedSource.DynamicSitemap.Services
 {

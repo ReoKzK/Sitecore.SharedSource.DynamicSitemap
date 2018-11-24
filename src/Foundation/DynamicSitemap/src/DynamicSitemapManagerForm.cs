@@ -3,10 +3,8 @@ using Sitecore.SharedSource.DynamicSitemap.Configuration;
 using Sitecore.Web.UI.HtmlControls;
 using Sitecore.Web.UI.Sheer;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Sitecore.SharedSource.DynamicSitemap
 {

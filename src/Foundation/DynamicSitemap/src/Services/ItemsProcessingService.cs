@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Sitecore.Data.Items;
+﻿using Sitecore.Data.Items;
 using Sitecore.Links;
 using Sitecore.SharedSource.DynamicSitemap.Helpers;
 using Sitecore.SharedSource.DynamicSitemap.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Sitecore.SharedSource.DynamicSitemap.Services
 {

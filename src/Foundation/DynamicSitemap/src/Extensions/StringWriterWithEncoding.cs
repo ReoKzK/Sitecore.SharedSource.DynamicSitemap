@@ -8,16 +8,16 @@ namespace Sitecore.SharedSource.DynamicSitemap.Extensions
     /// </summary>
     public sealed class StringWriterWithEncoding : StringWriter
     {
-        private readonly Encoding encoding;
+        private readonly Encoding _encoding;
 
         public StringWriterWithEncoding(Encoding encoding)
         {
-            this.encoding = encoding;
+            this._encoding = encoding;
         }
 
         public override Encoding Encoding
         {
-            get { return encoding; }
+            get { return _encoding; }
         }
     }
 }

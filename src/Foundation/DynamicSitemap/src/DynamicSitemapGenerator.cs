@@ -6,14 +6,14 @@ using Sitecore.SharedSource.DynamicSitemap.Constants;
 using Sitecore.SharedSource.DynamicSitemap.Extensions;
 using Sitecore.SharedSource.DynamicSitemap.Model;
 using Sitecore.SharedSource.DynamicSitemap.Modules;
+using Sitecore.SharedSource.DynamicSitemap.Repositories;
+using Sitecore.SharedSource.DynamicSitemap.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using Sitecore.SharedSource.DynamicSitemap.Repositories;
-using Sitecore.SharedSource.DynamicSitemap.Services;
 
 namespace Sitecore.SharedSource.DynamicSitemap
 {
