@@ -1,0 +1,14 @@
+﻿---
+ID: "6975d5e6-dd3f-4a69-9378-33615a98f5e9"
+Parent: "a5c9e136-4ae0-4b0b-8d9c-bfad7ebcaf68"
+Template: "6e82c74a-5940-473b-8b60-cbb9d79edb2d"
+Path: /sitecore/system/Modules/Dynamic Sitemap XML/Sites/Website/Change Frequency Definitions
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160206T133409Z

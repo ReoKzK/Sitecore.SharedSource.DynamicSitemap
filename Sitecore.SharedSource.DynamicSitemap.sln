@@ -10,6 +10,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project", "Project", "{12A093A7-7A32-44BF-A2C9-688DB681C324}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{C3F1DB21-8319-4496-B142-9BF426AD52F2}"
+	ProjectSection(SolutionItems) = preProject
+		publishsettings.targets = publishsettings.targets
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DynamicSitemap", "DynamicSitemap", "{895CD4DD-8B8F-4D81-BC09-27FF14C72FCD}"
 EndProject

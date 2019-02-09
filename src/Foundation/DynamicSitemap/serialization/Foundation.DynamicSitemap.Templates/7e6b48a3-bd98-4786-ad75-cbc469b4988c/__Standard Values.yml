@@ -1,0 +1,21 @@
+﻿---
+ID: "c1669c3b-8767-4237-96db-0467bf878ab7"
+Parent: "7e6b48a3-bd98-4786-ad75-cbc469b4988c"
+Template: "7e6b48a3-bd98-4786-ad75-cbc469b4988c"
+Path: /sitecore/templates/Dynamic Sitemap XML/Priority/Priority For Templates/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160206T144154Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
+    - ID: "7b69bfcd-3a78-429f-b7e3-256741e8ead6"
+      Hint: Priority
+      Value: 0.5

@@ -67,7 +67,7 @@ namespace Sitecore.SharedSource.DynamicSitemap
         public void RefreshButtonClick()
         {
             DynamicSitemapGenerator dynamicSitemapGenerator = new DynamicSitemapGenerator();
-            dynamicSitemapGenerator.RegenerateSitemap(this, new EventArgs());
+            dynamicSitemapGenerator.RegenerateSitemap();
 
             StringBuilder stringBuilder = new StringBuilder();
 

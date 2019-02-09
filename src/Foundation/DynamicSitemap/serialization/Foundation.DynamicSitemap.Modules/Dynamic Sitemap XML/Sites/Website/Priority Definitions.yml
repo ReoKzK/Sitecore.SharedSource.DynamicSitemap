@@ -1,0 +1,14 @@
+﻿---
+ID: "90af3881-6098-4dab-b365-0e285d8964b5"
+Parent: "a5c9e136-4ae0-4b0b-8d9c-bfad7ebcaf68"
+Template: "fedc5e17-4e3e-4057-b191-9d3efc486277"
+Path: /sitecore/system/Modules/Dynamic Sitemap XML/Sites/Website/Priority Definitions
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160206T144518Z

@@ -108,19 +108,12 @@ namespace Sitecore.SharedSource.DynamicSitemap
             _itemsProcessingService = itemsProcessingService;
             _robotsService = robotsService;
         }
-
+        
         /// <summary>
         /// Regenerates sitemap for all configured sites
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
-        public void RegenerateSitemap(object sender, System.EventArgs args)
+        public void RegenerateSitemap()
         {
-            if (args == null)
-            {
-                return;
-            }
-
             EnsureSitemapsDirectoryExists();
 
             ReadConfigurations();
@@ -227,13 +220,18 @@ namespace Sitecore.SharedSource.DynamicSitemap
                 }
             }
 
-            SitecoreConfiguration.MainSiteConfiguration = SiteConfigurations.FirstOrDefault(x => x.Site.Name.ToLower() == SitecoreConfiguration.MainSiteConfigurationItem.Name.ToLower());
+            SitecoreConfiguration.MainSiteConfiguration = SiteConfigurations.FirstOrDefault(x => String.Equals(x.Site.Name, SitecoreConfiguration.MainSiteConfigurationItem.Name, StringComparison.CurrentCultureIgnoreCase));
+
+            if (SitecoreConfiguration.MainSiteConfiguration == null)
+            {
+                Sitecore.Diagnostics.Log.Warn("No main site configuration", this);
+            }
 
             SitemapIndex = new SitemapIndexConfiguration
             {
                 ServerHost = SitecoreConfiguration.MainSiteConfiguration != null
                     ? SitecoreConfiguration.MainSiteConfiguration.ServerHost
-                    : SiteConfigurations.FirstOrDefault().ServerHost,
+                    : SiteConfigurations.FirstOrDefault()?.ServerHost,
                 FileName = _sitemapIndexFileName
             };
         }

@@ -1,0 +1,33 @@
+﻿---
+ID: "2d727cb6-702f-4196-be85-c242782f8623"
+Parent: "eab6d9cb-dc0c-44a6-8188-e737b33dc87a"
+Template: "8e0bf0cc-49a9-4d96-9b50-17c353a6c03e"
+Path: /sitecore/system/Modules/Dynamic Sitemap XML/Configuration
+DB: master
+SharedFields:
+- ID: "20f9f33c-42ad-4bb8-939b-4f40703830e8"
+  Hint: Search Engines
+  Type: Multilist
+  Value: "{7AA7EA09-9818-4EF3-9A4B-8B75D9C83F3C}"
+- ID: "908969f5-ce44-484c-85be-6f168a62b1dd"
+  Hint: Processed languages
+  Type: Multilist
+  Value: "{AF584191-45C9-4201-8740-5409F4CF8BDD}"
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 200
+- ID: "ba54acd6-7f8f-4373-9ed0-510850ec76fa"
+  Hint: Main Site Configuration
+  Value: "{A5C9E136-4AE0-4B0B-8D9C-BFAD7EBCAF68}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20160703T202251Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\admin
